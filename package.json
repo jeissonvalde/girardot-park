@@ -1,0 +1,47 @@
+{
+  "name": "girardot-park",
+  "version": "0.1.0",
+  "description": "Parque para Girardot Cundinamarca.",
+  "main": "index.js",
+  "repository": "https://github.com/jeissonvalde/girardot-park.git",
+  "author": "Jeisson Valderrama",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "NODE_ENV=test node src/server",
+    "start": "yarn run serve"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.5",
+    "express-session": "^1.15.5",
+    "jsonwebtoken": "^8.0.1",
+    "materialize-css": "^0.100.2",
+    "moment": "^2.17.1",
+    "money-formatter": "^0.1.4",
+    "package.json": "^2.0.1",
+    "page": "^1.7.1",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4",
+    "pug": "^2.0.0-rc.4",
+    "title": "^1.0.0",
+    "yo-yo": "^1.4.1"
+  },
+  "devDependencies": {
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-transform-regenerator": "^6.22.0",
+    "babelify": "^7.3.0",
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.9.0"
+  }
+}
