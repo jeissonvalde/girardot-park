@@ -1,0 +1,51 @@
+// For --> '/' (Home page)
+
+.home-container {
+  margin: 30px 0;
+  overflow-x: hidden;
+}
+
+.comments-container {
+  background-color: red;
+  height: 250px;
+  width: 50% !important;
+  position: relative !important;
+}
+
+.home-divider {
+  margin: 50px 0;
+  background-color: white;
+}
+
+.box-image {
+  display: flex;
+  align-content: center;
+  transition: all 1s cubic-bezier(0.55, 0.35, 0, 0.69);
+  opacity: 0;
+
+  img {
+    min-width: 350px;
+    width: 100%;
+  }
+}
+
+.main-image {
+  opacity: 1 !important;
+}
+
+.section-two {
+
+  .box-image {
+
+    transform: translateX(-110%);
+  }
+}
+
+.section-three {
+
+  .box-image {
+
+    transform: translateX(110%);
+    
+  }
+}

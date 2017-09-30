@@ -1,0 +1,14 @@
+/*
+ *  Styles, it is modularized
+ */
+
+@import "./home";
+
+body {
+  background-color: white;
+}
+
+#main-container {
+  width: 90%;
+  margin: 0 auto;
+}
