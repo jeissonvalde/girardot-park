@@ -13,7 +13,6 @@ export default function aparitionToCenter () {
           'transform': 'translateX(0%)',
           'opacity': '1'
         })
-        console.log($(document).scrollTop())
       }
     },
     {
@@ -22,7 +21,6 @@ export default function aparitionToCenter () {
           'transform': 'translateX(0%)',
           'opacity': '1'
         })
-        console.log($(document).scrollTop())
       }
     },
   ]

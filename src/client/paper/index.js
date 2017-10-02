@@ -1,13 +1,9 @@
 'use strict'
 
-import page from 'page'
-import title from 'title'
-import template from './template'
-import animation from './animations'
 import header from '../header'
 
 
-page('/',
+page('/paper/:',
       header,
       (ctx, next) => {
 
