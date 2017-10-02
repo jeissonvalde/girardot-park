@@ -4,11 +4,31 @@
 
 @import "./home";
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   background-color: white;
+  overflow-x: hidden;
+}
+
+#header-container {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  z-index: 50;
 }
 
 #main-container {
   width: 90%;
   margin: 0 auto;
+  height: 100%;
+  margin-top: 64px;
+}
+
+.nav-wrapper {
+
+  background-color: #161C2E;
 }
