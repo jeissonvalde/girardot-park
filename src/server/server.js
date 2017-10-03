@@ -34,21 +34,47 @@ app.use(passport.session())
 // no resend the these.
 app.set('view engine', 'pug')
 
-passport.use(auth.localStrategy)
 passport.use(auth.facebookStrategy)
 // passport.use(auth.twitterStrategy)
 passport.deserializeUser(auth.deserializeUser)
 passport.serializeUser(auth.serializeUser)
 
+// Messages for auth process
+let badAccess = 'A ocurrido un error al ingresar con '
 
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }))
+
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  successRedirect: '/',
+  failureRedirect: `/error/${badAccess + ' facebook'}` }))
+
+// app.get('/auth/twitter', passport.authenticate('twitter'))
+
+// app.get('/auth/twitter/callback', passport.authenticate('twitter', {
+//   successRedirect: '/',
+//   failureRedirect: `/error/${badAccess + ' twitter'}` }))
+
+app.get('/whoami', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json(req.user)
+  } else {
+    res.send([])
+  }
+})
+
+app.get('/logout', (req, res) => {
+  req.logout()
+
+  res.redirect('/')
+})
+
+// Content Endpoints
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Aires GM' })
+  res.render('index', { title: 'Inicio' })
 })
 
-
-app.get('/welcome/:string', (req, res) => {
-  res.render('index', { title: '¡Bienvenid@!' })
+app.get('/user/folder', (req, res) => {
+  res.render('index', { title: 'Portafolio' })
 })
-
 
 app.listen(port, () => console.log(`Parques Gir server listening on port ${port}`))

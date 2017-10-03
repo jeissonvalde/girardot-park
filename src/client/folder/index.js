@@ -3,12 +3,13 @@
 import page from 'page'
 import title from 'title'
 import template from './template'
+import modal from './modals'
 import animation from './animations'
 import header from '../header'
 import data from '../utils/data-center'
 
 
-page('/',
+page('/user/folder',
       data.load.auth,
       header,
       (ctx, next) => {
@@ -16,12 +17,17 @@ page('/',
   $(document).ready(function(){
 
     let $main = $('#main-container')
-    title('Parques Girardot')
+    title('Portafolio')
     $main.empty().append(template())
 
     // Materialize components
-    $('.materialboxed').materialbox()
-    $('.carousel').carousel()
-    animation.aparitionToCenter()
+    $('ul.tabs').tabs()
+
+    // modals init
+    $('#modals-container').empty().append(modal.help())
+    $('.modal').modal()
+
+    // animations
+    // animation.tabs()
   })
 })

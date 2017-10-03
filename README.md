@@ -18,5 +18,5 @@
     #FFF5F5;                   beish muy claro 
     #C02727;                   Vino tinto rosa. (usado en botón)
     
-    
+    a[href="Link"]{Texto}
     -->

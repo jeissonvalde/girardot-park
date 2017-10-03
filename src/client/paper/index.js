@@ -3,14 +3,14 @@
 import header from '../header'
 
 
-page('/paper/:',
+page('/paper/:id',
       header,
       (ctx, next) => {
 
   $(document).ready(function(){
 
     let $main = $('#main-container')
-    title('Parques Girardot')
+    title('#####  Título del artículo ####')
     $main.empty().append(template())
 
     // Materialize components
