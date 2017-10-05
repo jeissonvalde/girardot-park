@@ -16,3 +16,18 @@ $blueDark: #161C2E;
     font-family: 'Reem Kufi';
   }
 }
+
+.editit { top: 48px !important; }
+
+.editit,
+.seeit {
+  span {
+    color: black;
+    font-size: 12px;
+    margin-right: 10px;
+  }
+
+  i {
+    font-size: 20px;
+  }
+}

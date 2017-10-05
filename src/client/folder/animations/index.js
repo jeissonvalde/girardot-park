@@ -1,8 +1,8 @@
 'use strict'
 
-import tabs from './tabs'
+import saveArt from './save-art'
 
 
 export default {
-  tabs
+  saveArt
 }

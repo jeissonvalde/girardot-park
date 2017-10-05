@@ -11687,53 +11687,129 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _tabs = require('./tabs');
+var _saveArt = require('./save-art');
 
-var _tabs2 = _interopRequireDefault(_tabs);
+var _saveArt2 = _interopRequireDefault(_saveArt);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  tabs: _tabs2.default
+  saveArt: _saveArt2.default
 };
 
-},{"./tabs":373}],373:[function(require,module,exports){
+},{"./save-art":373}],373:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = tabs;
+exports.default = saveArt;
 
-var _formAdd = require('../template/form-add');
+var _sendArt = require('../data-comm/send-art');
 
-var _formAdd2 = _interopRequireDefault(_formAdd);
-
-var _list = require('../template/list');
-
-var _list2 = _interopRequireDefault(_list);
+var _sendArt2 = _interopRequireDefault(_sendArt);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function tabs() {
+function saveArt(ev) {
 
-  $('.tab.col.s3').on('click', function (ev) {
-    var to = $(this).find('a').attr('href');
-    var $content = $('#folder-content');
-    var $list = $('#listArtsContent');
-    var $mainDesign = $('#mainDesign');
+  $('#addArtContent form').on('click', '.save-btn', function (ev) {
+    ev.preventDefault();
+    var $form = $(this).closest('form.col.s12');
+    var valid = 'Todo bien';
 
-    if (to == '#listArts') {
-      $content.empty().append($list);
+    var title = $form.find('#title').val();
+    var ref = $form.find('#ref').val();
+    var desc = $form.find('#description').val();
+
+    if (title == '') {
+      $form.find('#title').addClass('invalid');
+      valid = 'Mal';
     }
 
-    if (to == '#addArt') {
-      $content.empty().append($mainDesign);
+    if (ref == '') {
+      $form.find('#ref').addClass('invalid');
+      valid = 'Mal';
+    }
+
+    if (desc == '') {
+      $form.find('#description').addClass('invalid');
+      valid = 'Mal';
+    }
+
+    if (valid == 'Todo bien') {
+      var data = {
+        title: $form.find('#title').val(),
+        face_link: $form.find('#ref').val(),
+        video: $form.find('#video').val(),
+        description: $form.find('#description').val()
+      };
+
+      var user = {
+        name: $form.find('#user').val(),
+        profile_image: $('.dropdown-button.profile-img img').attr('src')
+      };
+
+      (0, _sendArt2.default)(data, user);
     }
   });
 }
 
-},{"../template/form-add":377,"../template/list":379}],374:[function(require,module,exports){
+},{"../data-comm/send-art":374}],374:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _templateObject = _taggedTemplateLiteral(['\n        <li id="', '" class="collection-item avatar" style="background-color: #EF6C35; transition: all .8s ease;">\n          <img src="', '" alt="imagen de perfil" class="circle">\n          <span class="title">', '</span>\n          <p>Autor: ', '<br>\n            <a href="', '">Publicaci\xF3n en facebook</a>\n          </p>\n          <a href="#!" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>\n          <a href="#!" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>\n        </li>\n      '], ['\n        <li id="', '" class="collection-item avatar" style="background-color: #EF6C35; transition: all .8s ease;">\n          <img src="', '" alt="imagen de perfil" class="circle">\n          <span class="title">', '</span>\n          <p>Autor: ', '<br>\n            <a href="', '">Publicaci\xF3n en facebook</a>\n          </p>\n          <a href="#!" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>\n          <a href="#!" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>\n        </li>\n      ']);
+
+exports.default = sendArt;
+
+var _yoYo = require('yo-yo');
+
+var _yoYo2 = _interopRequireDefault(_yoYo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function sendArt(data, user) {
+
+  $.ajax({
+    method: 'POST',
+    url: '/user/folder/add-paper',
+    data: data
+  }).done(function (data) {
+    console.log('%c Almacenado', 'color: #3c86e6; font-size: 10px');
+    console.log('%c ' + data, 'color: green; font-size: 10px');
+
+    var newId = 'li_' + Math.floor(Math.random() * 20 + 6);
+    var $form = $('#addArtContent');
+    $('ul.tabs').tabs('select_tab', 'listArts');
+
+    var temp = (0, _yoYo2.default)(_templateObject, newId, user.profile_image, data.title.substr(0, 38), user.name, data.face_link);
+
+    $('#list_for_arts').prepend(temp);
+    $form.find('#title').val('');
+    $form.find('#ref').val('');
+    $form.find('#video').val('');
+    $form.find('#description').val('');
+
+    if ($form.find('#msg').val() == 'delete') {
+      $form.find('#title').val('');
+      $('#list_for_arts #msg_empty').remove();
+    }
+
+    setTimeout(function () {
+      $('#' + newId).css({ 'background-color': '#ffffff' });
+    }, 800);
+  }).fail(function (err) {
+    console.error(err);
+  });
+}
+
+},{"yo-yo":366}],375:[function(require,module,exports){
 'use strict';
 
 var _page = require('page');
@@ -11766,13 +11842,17 @@ var _dataCenter2 = _interopRequireDefault(_dataCenter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _page2.default)('/user/folder', _dataCenter2.default.load.auth, _header2.default, function (ctx, next) {
+(0, _page2.default)('/user/folder', _dataCenter2.default.load.auth, _dataCenter2.default.load.myfolder, _header2.default, function (ctx, next) {
 
   $(document).ready(function () {
 
+    var data = {
+      user: ctx.auth,
+      arts: ctx.auth.folder
+    };
     var $main = $('#main-container');
     (0, _title2.default)('Portafolio');
-    $main.empty().append((0, _template2.default)());
+    $main.empty().append((0, _template2.default)(data));
 
     // Materialize components
     $('ul.tabs').tabs();
@@ -11782,11 +11862,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     $('.modal').modal();
 
     // animations
-    // animation.tabs()
+    _animations2.default.saveArt();
   });
 });
 
-},{"../header":382,"../utils/data-center":395,"./animations":372,"./modals":376,"./template":378,"page":361,"title":365}],375:[function(require,module,exports){
+},{"../header":383,"../utils/data-center":396,"./animations":372,"./modals":377,"./template":379,"page":361,"title":365}],376:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11810,7 +11890,7 @@ function help(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],376:[function(require,module,exports){
+},{"yo-yo":366}],377:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11827,14 +11907,14 @@ exports.default = {
   help: _help2.default
 };
 
-},{"./help":375}],377:[function(require,module,exports){
+},{"./help":376}],378:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    <div class="row" id="addArtContent">\n      <form class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a class="waves-effect waves-teal btn-flat right">Guardar</a>\n            <a class="waves-effect waves-teal btn-flat right" href="#modal_help">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate">\n            <label for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="user" type="text" class="validate">\n            <input id="userId" type="hidden" class="validate">\n            <label for="user">Autor</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="video" type="text" class="validate">\n            <label for="video">V\xEDdeo (link de cualquier plataforma)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate">\n            <label for="ref">Link facebook</label>\n          </div>\n          <div class="input-field col s12">\n            <input id="description" type="text" class="validate">\n            <label for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a class="waves-effect waves-teal btn-flat right">Guardar</a>\n        </div>\n      </form>\n    </div>\n  '], ['\n    <div class="row" id="addArtContent">\n      <form class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a class="waves-effect waves-teal btn-flat right">Guardar</a>\n            <a class="waves-effect waves-teal btn-flat right" href="#modal_help">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate">\n            <label for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="user" type="text" class="validate">\n            <input id="userId" type="hidden" class="validate">\n            <label for="user">Autor</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="video" type="text" class="validate">\n            <label for="video">V\xEDdeo (link de cualquier plataforma)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate">\n            <label for="ref">Link facebook</label>\n          </div>\n          <div class="input-field col s12">\n            <input id="description" type="text" class="validate">\n            <label for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a class="waves-effect waves-teal btn-flat right">Guardar</a>\n        </div>\n      </form>\n    </div>\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n    <div class="row" id="addArtContent">\n      <form class="col s12" enctype="multipart/form-data">\n        <div class="row">\n          <div class="col s12">\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a class="waves-effect waves-teal btn-flat right" href="#modal_help">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Publica un nuevo art\xEDculo, puedes guiarte con la <a href="#modal_help">ayuda</a> que te ofrecemos. Posteriormente a la\n            publicaci\xF3n, puedes editar y redise\xF1ar el art\xEDculo.\n          </p>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate">\n            <label for="title" data-error="dato necesario">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate">\n            <label for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate">\n            <input id="user" type="hidden" class="validate" value="', '">\n            <input id="msg" type="hidden" class="validate" value="">\n            <label for="ref" data-error="dato necesario">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate"></textarea>\n            <label for="description" data-error="dato necesario">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  '], ['\n    <div class="row" id="addArtContent">\n      <form class="col s12" enctype="multipart/form-data">\n        <div class="row">\n          <div class="col s12">\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a class="waves-effect waves-teal btn-flat right" href="#modal_help">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Publica un nuevo art\xEDculo, puedes guiarte con la <a href="#modal_help">ayuda</a> que te ofrecemos. Posteriormente a la\n            publicaci\xF3n, puedes editar y redise\xF1ar el art\xEDculo.\n          </p>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate">\n            <label for="title" data-error="dato necesario">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate">\n            <label for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate">\n            <input id="user" type="hidden" class="validate" value="', '">\n            <input id="msg" type="hidden" class="validate" value="">\n            <label for="ref" data-error="dato necesario">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate"></textarea>\n            <label for="description" data-error="dato necesario">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  ']);
 
 exports.default = formNewArt;
 
@@ -11846,19 +11926,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-function formNewArt(opts) {
+function formNewArt(user) {
 
-  return (0, _yoYo2.default)(_templateObject);
+  return (0, _yoYo2.default)(_templateObject, user.name);
 }
 
-},{"yo-yo":366}],378:[function(require,module,exports){
+},{"yo-yo":366}],379:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    <div class="folder-container row">\n      <ul id="tabs-swipe-demo" class="tabs">\n        <li class="tab col s6"><a href="#listArts">Art\xEDculos</a></li>\n        <li class="tab col s6"><a class="active" href="#formAdd">Publicar</a></li>\n      </ul>\n      <div id="listArts" class="col s12">', '</div>\n      <div id="formAdd" class="col s12">', '</div>\n    </div>\n  '], ['\n    <div class="folder-container row">\n      <ul id="tabs-swipe-demo" class="tabs">\n        <li class="tab col s6"><a href="#listArts">Art\xEDculos</a></li>\n        <li class="tab col s6"><a class="active" href="#formAdd">Publicar</a></li>\n      </ul>\n      <div id="listArts" class="col s12">', '</div>\n      <div id="formAdd" class="col s12">', '</div>\n    </div>\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n    <div class="folder-container row">\n      <ul id="tabs-swipe-demo" class="tabs">\n        <li class="tab col s6"><a class="active" href="#listArts">Art\xEDculos</a></li>\n        <li class="tab col s6"><a href="#formAdd">Publicar</a></li>\n      </ul>\n      <div id="listArts" class="col s12">', '</div>\n      <div id="formAdd" class="col s12">', '</div>\n    </div>\n  '], ['\n    <div class="folder-container row">\n      <ul id="tabs-swipe-demo" class="tabs">\n        <li class="tab col s6"><a class="active" href="#listArts">Art\xEDculos</a></li>\n        <li class="tab col s6"><a href="#formAdd">Publicar</a></li>\n      </ul>\n      <div id="listArts" class="col s12">', '</div>\n      <div id="formAdd" class="col s12">', '</div>\n    </div>\n  ']);
 
 exports.default = template;
 
@@ -11882,17 +11962,19 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 function template(data) {
 
-  return (0, _yoYo2.default)(_templateObject, (0, _list2.default)(), (0, _formAdd2.default)());
+  return (0, _yoYo2.default)(_templateObject, (0, _list2.default)(data.arts), (0, _formAdd2.default)(data.user));
 }
 
-},{"./form-add":377,"./list":379,"yo-yo":366}],379:[function(require,module,exports){
+},{"./form-add":378,"./list":380,"yo-yo":366}],380:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    <ul class="collection" id="listArtsContent">\n      <li class="collection-item avatar">\n        <img src="http://materializecss.com/images/yuna.jpg" alt="" class="circle">\n        <span class="title">Title</span>\n        <p>First Line <br>\n          Second Line\n        </p>\n        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>\n      </li>\n      <li class="collection-item avatar">\n        <i class="material-icons circle">folder</i>\n        <span class="title">Title</span>\n        <p>First Line <br>\n          Second Line\n        </p>\n        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>\n      </li>\n      <li class="collection-item avatar">\n        <i class="material-icons circle green">insert_chart</i>\n        <span class="title">Title</span>\n        <p>First Line <br>\n          Second Line\n        </p>\n        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>\n      </li>\n      <li class="collection-item avatar">\n        <i class="material-icons circle red">play_arrow</i>\n        <span class="title">Title</span>\n        <p>First Line <br>\n          Second Line\n        </p>\n        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>\n      </li>\n    </ul>\n  '], ['\n    <ul class="collection" id="listArtsContent">\n      <li class="collection-item avatar">\n        <img src="http://materializecss.com/images/yuna.jpg" alt="" class="circle">\n        <span class="title">Title</span>\n        <p>First Line <br>\n          Second Line\n        </p>\n        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>\n      </li>\n      <li class="collection-item avatar">\n        <i class="material-icons circle">folder</i>\n        <span class="title">Title</span>\n        <p>First Line <br>\n          Second Line\n        </p>\n        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>\n      </li>\n      <li class="collection-item avatar">\n        <i class="material-icons circle green">insert_chart</i>\n        <span class="title">Title</span>\n        <p>First Line <br>\n          Second Line\n        </p>\n        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>\n      </li>\n      <li class="collection-item avatar">\n        <i class="material-icons circle red">play_arrow</i>\n        <span class="title">Title</span>\n        <p>First Line <br>\n          Second Line\n        </p>\n        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>\n      </li>\n    </ul>\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n    <ul class="collection" id="list_for_arts">\n      ', '\n    </ul>\n  '], ['\n    <ul class="collection" id="list_for_arts">\n      ', '\n    </ul>\n  ']),
+    _templateObject2 = _taggedTemplateLiteral(['<li id="msg_empty" class="collection-item avatar">\n        A\xFAn no has subido ning\xFAn art\xEDculo. Int\xE9ntalo en la pesta\xF1a PUBLICAR <i class="ion-arrow-up-c"></i>\n        </li>'], ['<li id="msg_empty" class="collection-item avatar">\n        A\xFAn no has subido ning\xFAn art\xEDculo. Int\xE9ntalo en la pesta\xF1a PUBLICAR <i class="ion-arrow-up-c"></i>\n        </li>']),
+    _templateObject3 = _taggedTemplateLiteral(['\n          <li class="collection-item avatar">\n            <img src="', '" alt="imagen de perfil" class="circle">\n            <span class="title">', '</span>\n            <p>Autor: ', '<br>\n              <a href="', '">Publicaci\xF3n en facebook</a>\n            </p>\n            <a href="#!" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>\n            <a href="#!" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>\n          </li>\n        '], ['\n          <li class="collection-item avatar">\n            <img src="', '" alt="imagen de perfil" class="circle">\n            <span class="title">', '</span>\n            <p>Autor: ', '<br>\n              <a href="', '">Publicaci\xF3n en facebook</a>\n            </p>\n            <a href="#!" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>\n            <a href="#!" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>\n          </li>\n        ']);
 
 exports.default = list;
 
@@ -11904,12 +11986,32 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-function list(opts) {
+function list(arts) {
 
-  return (0, _yoYo2.default)(_templateObject);
+  return (0, _yoYo2.default)(_templateObject, makeList(arts));
 }
 
-},{"yo-yo":366}],380:[function(require,module,exports){
+function makeList(arr) {
+
+  setTimeout(function () {
+
+    if (arr[0] == undefined) {
+      $('#list_for_arts').append((0, _yoYo2.default)(_templateObject2));
+
+      $('#addArtContent #msg').val('delete');
+    } else {
+
+      for (var i = 0; i < arr.length; i++) {
+        var el = arr[i];
+        var temp = (0, _yoYo2.default)(_templateObject3, el.user.profile_image, el.title.substr(0, 38), el.user.name, el.face_link);
+
+        $('#list_for_arts').append(temp);
+      }
+    }
+  }, 1000);
+}
+
+},{"yo-yo":366}],381:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11926,7 +12028,7 @@ exports.default = {
   init: _init2.default
 };
 
-},{"./init":381}],381:[function(require,module,exports){
+},{"./init":382}],382:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11962,9 +12064,8 @@ function init() {
     }
   });
 }
-// faa-tada animated
 
-},{}],382:[function(require,module,exports){
+},{}],383:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12021,7 +12122,7 @@ function header(ctx, next) {
   next();
 }
 
-},{"./animations":380,"./modal":383,"./template":385,"yo-yo":366}],383:[function(require,module,exports){
+},{"./animations":381,"./modal":384,"./template":386,"yo-yo":366}],384:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12038,7 +12139,7 @@ exports.default = {
   login: _modalLogin2.default
 };
 
-},{"./modal-login":384}],384:[function(require,module,exports){
+},{"./modal-login":385}],385:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12062,7 +12163,7 @@ function login(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],385:[function(require,module,exports){
+},{"yo-yo":366}],386:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12097,7 +12198,7 @@ function template(opts) {
   return (0, _yoYo2.default)(_templateObject3, btnLogin);
 }
 
-},{"yo-yo":366}],386:[function(require,module,exports){
+},{"yo-yo":366}],387:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12127,7 +12228,7 @@ function aparitionToCenter() {
   Materialize.scrollFire(options);
 }
 
-},{}],387:[function(require,module,exports){
+},{}],388:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12144,7 +12245,7 @@ exports.default = {
   aparitionToCenter: _aparitions2.default
 };
 
-},{"./aparitions":386}],388:[function(require,module,exports){
+},{"./aparitions":387}],389:[function(require,module,exports){
 'use strict';
 
 var _page = require('page');
@@ -12188,7 +12289,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   });
 });
 
-},{"../header":382,"../utils/data-center":395,"./animations":387,"./template":390,"page":361,"title":365}],389:[function(require,module,exports){
+},{"../header":383,"../utils/data-center":396,"./animations":388,"./template":391,"page":361,"title":365}],390:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12212,7 +12313,7 @@ function carouselTemp(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],390:[function(require,module,exports){
+},{"yo-yo":366}],391:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12248,7 +12349,7 @@ function template() {
   return (0, _yoYo2.default)(_templateObject, (0, _sect2.default)(), (0, _sect4.default)(), (0, _sect6.default)());
 }
 
-},{"./sect-1":391,"./sect-2":392,"./sect-3":393,"yo-yo":366}],391:[function(require,module,exports){
+},{"./sect-1":392,"./sect-2":393,"./sect-3":394,"yo-yo":366}],392:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12276,7 +12377,7 @@ function sectOne(opts) {
   return (0, _yoYo2.default)(_templateObject, (0, _carousel2.default)());
 }
 
-},{"./carousel":389,"yo-yo":366}],392:[function(require,module,exports){
+},{"./carousel":390,"yo-yo":366}],393:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12300,7 +12401,7 @@ function sectTwo(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],393:[function(require,module,exports){
+},{"yo-yo":366}],394:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12324,7 +12425,7 @@ function sectThree(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],394:[function(require,module,exports){
+},{"yo-yo":366}],395:[function(require,module,exports){
 'use strict';
 
 var _page = require('page');
@@ -12349,7 +12450,7 @@ require('./folder');
 // PLUGINS FOR SOCIAL NETWORKS
 (0, _SDKFacebook2.default)();
 
-},{"./SDK-facebook":368,"./auth":369,"./folder":374,"./home":388,"babel-polyfill":26,"page":361}],395:[function(require,module,exports){
+},{"./SDK-facebook":368,"./auth":369,"./folder":375,"./home":389,"babel-polyfill":26,"page":361}],396:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12366,7 +12467,7 @@ exports.default = {
   load: _load2.default
 };
 
-},{"./load":396}],396:[function(require,module,exports){
+},{"./load":397}],397:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12421,8 +12522,52 @@ function auth(ctx, next) {
   }, null, this, [[1, 9]]);
 }
 
+// Load user's papers or publications
+function myfolder(ctx, next) {
+  var papers, id;
+  return regeneratorRuntime.async(function myfolder$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          papers = void 0;
+          id = ctx.auth.exposedId;
+          _context2.prev = 2;
+          _context2.next = 5;
+          return regeneratorRuntime.awrap(_axios2.default.get('/api/folder/' + id).then(function (res) {
+            return res.data;
+          }));
+
+        case 5:
+          papers = _context2.sent;
+
+
+          if (papers[0] != undefined) {
+            ctx.auth.folder = papers;
+          } else {
+            ctx.auth.folder = [];
+          }
+
+          next();
+          _context2.next = 13;
+          break;
+
+        case 10:
+          _context2.prev = 10;
+          _context2.t0 = _context2['catch'](2);
+
+          console.log(_context2.t0);
+
+        case 13:
+        case 'end':
+          return _context2.stop();
+      }
+    }
+  }, null, this, [[2, 10]]);
+}
+
 exports.default = {
-  auth: auth
+  auth: auth,
+  myfolder: myfolder
 };
 
-},{"axios":1}]},{},[394]);
+},{"axios":1}]},{},[395]);

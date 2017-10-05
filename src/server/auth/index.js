@@ -5,7 +5,6 @@ import config from '../config'
 import jwt from 'jsonwebtoken'
 
 const FacebookStrategy = require('passport-facebook').Strategy
-      // TwitterStrategy = require('passport-twitter').Strategy,
 
 const client = girpark.createClient(config.client)
 
@@ -47,36 +46,6 @@ exports.facebookStrategy = new FacebookStrategy({
     })
   })
 })
-
-// exports.twitterStrategy = new TwitterStrategy({
-//     consumerKey: config.auth.twitter.consumerKey,
-//     consumerSecret: config.auth.twitter.consumerSecret,
-//     callbackURL: config.auth.twitter.callbackURL,
-//     profileFields:['id', 'displayName', 'profile_image_url']
-//   }, function(token, tokenSecret, profile, done) {
-//       let userProfile = {
-//         idSocial: profile._json.id_str,
-//         name: profile._json.name,
-//         email: 'pending',
-//         profile_image: profile._json.profile_image_url,
-//         birthday: profile._json.birthday,
-//         gender: profile._json.gender,
-//         twitter: true
-//       }
-
-//       findOrCreate(userProfile, (err, user) => {
-//         if (err) return done(err)
-
-//         jwt.sign({ userId: user.idSocial }, config.secret, {}, (e, token) => {
-//           if (e) return done(err)
-
-//           user.token = token
-
-//           return done(null, user)
-//         })
-//       })
-//   }
-// )
 
 exports.serializeUser = function (user, done) {
   return done(null, {

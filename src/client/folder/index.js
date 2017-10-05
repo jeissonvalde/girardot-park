@@ -11,14 +11,19 @@ import data from '../utils/data-center'
 
 page('/user/folder',
       data.load.auth,
+      data.load.myfolder,
       header,
       (ctx, next) => {
 
   $(document).ready(function(){
 
+    let data = {
+      user: ctx.auth,
+      arts: ctx.auth.folder
+    }
     let $main = $('#main-container')
     title('Portafolio')
-    $main.empty().append(template())
+    $main.empty().append(template(data))
 
     // Materialize components
     $('ul.tabs').tabs()
@@ -28,6 +33,6 @@ page('/user/folder',
     $('.modal').modal()
 
     // animations
-    // animation.tabs()
+    animation.saveArt()
   })
 })

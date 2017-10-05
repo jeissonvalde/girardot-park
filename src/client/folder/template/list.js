@@ -3,42 +3,44 @@
 import yo from 'yo-yo'
 
 
-export default function list (opts) {
+export default function list (arts) {
 
   return yo`
-    <ul class="collection" id="listArtsContent">
-      <li class="collection-item avatar">
-        <img src="http://materializecss.com/images/yuna.jpg" alt="" class="circle">
-        <span class="title">Title</span>
-        <p>First Line <br>
-          Second Line
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-      </li>
-      <li class="collection-item avatar">
-        <i class="material-icons circle">folder</i>
-        <span class="title">Title</span>
-        <p>First Line <br>
-          Second Line
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-      </li>
-      <li class="collection-item avatar">
-        <i class="material-icons circle green">insert_chart</i>
-        <span class="title">Title</span>
-        <p>First Line <br>
-          Second Line
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-      </li>
-      <li class="collection-item avatar">
-        <i class="material-icons circle red">play_arrow</i>
-        <span class="title">Title</span>
-        <p>First Line <br>
-          Second Line
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-      </li>
+    <ul class="collection" id="list_for_arts">
+      ${makeList(arts)}
     </ul>
   `
+}
+
+function makeList (arr) {
+
+
+  setTimeout(function () {
+
+    if (arr[0] == undefined) {
+      $('#list_for_arts').append(yo`<li id="msg_empty" class="collection-item avatar">
+        Aún no has subido ningún artículo. Inténtalo en la pestaña PUBLICAR <i class="ion-arrow-up-c"></i>
+        </li>`)
+
+      $('#addArtContent #msg').val('delete')
+    } else {
+
+      for (var i = 0; i < arr.length; i++) {
+        var el = arr[i];
+        var temp = yo`
+          <li class="collection-item avatar">
+            <img src="${el.user.profile_image}" alt="imagen de perfil" class="circle">
+            <span class="title">${el.title.substr(0, 38)}</span>
+            <p>Autor: ${el.user.name}<br>
+              <a href="${el.face_link}">Publicación en facebook</a>
+            </p>
+            <a href="#!" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>
+            <a href="#!" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>
+          </li>
+        `;
+
+        $('#list_for_arts').append(temp);
+      }
+    }
+  }, 1000)
 }

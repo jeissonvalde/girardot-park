@@ -3,7 +3,7 @@
 import header from '../header'
 
 
-page('/paper/:id',
+page('/paper/edit/:id',
       header,
       (ctx, next) => {
 

@@ -83,6 +83,19 @@
   padding-bottom: 20px;
   font-family: 'Reem Kufi'; }
 
+.editit {
+  top: 48px !important; }
+
+.editit span,
+.seeit span {
+  color: black;
+  font-size: 12px;
+  margin-right: 10px; }
+
+.editit i,
+.seeit i {
+  font-size: 20px; }
+
 body {
   background-color: #FFF5F5;
   overflow-x: hidden;
@@ -123,5 +136,6 @@ body {
 
 form {
   background-color: #fff;
+  padding-top: 15px;
   padding: 0 30px;
   margin: 15px auto; }
