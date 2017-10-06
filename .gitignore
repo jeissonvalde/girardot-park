@@ -3,3 +3,4 @@ others
 npm-debug.log
 env.sh
 yarn.lock
+memory.sh

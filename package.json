@@ -18,6 +18,7 @@
     "babel-register": "^6.26.0",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
+    "empty-element": "^1.0.0",
     "express": "^4.15.5",
     "express-session": "^1.15.5",
     "file-extension": "^3.1.2",

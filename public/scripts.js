@@ -184,7 +184,7 @@ module.exports = function xhrAdapter(config) {
 };
 
 }).call(this,require('_process'))
-},{"../core/createError":9,"./../core/settle":12,"./../helpers/btoa":16,"./../helpers/buildURL":17,"./../helpers/cookies":19,"./../helpers/isURLSameOrigin":21,"./../helpers/parseHeaders":23,"./../utils":25,"_process":363}],3:[function(require,module,exports){
+},{"../core/createError":9,"./../core/settle":12,"./../helpers/btoa":16,"./../helpers/buildURL":17,"./../helpers/cookies":19,"./../helpers/isURLSameOrigin":21,"./../helpers/parseHeaders":23,"./../utils":25,"_process":364}],3:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -737,7 +737,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this,require('_process'))
-},{"./adapters/http":2,"./adapters/xhr":2,"./helpers/normalizeHeaderName":22,"./utils":25,"_process":363}],15:[function(require,module,exports){
+},{"./adapters/http":2,"./adapters/xhr":2,"./helpers/normalizeHeaderName":22,"./utils":25,"_process":364}],15:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -1402,7 +1402,7 @@ module.exports = {
   trim: trim
 };
 
-},{"./helpers/bind":15,"is-buffer":356}],26:[function(require,module,exports){
+},{"./helpers/bind":15,"is-buffer":357}],26:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -1433,7 +1433,7 @@ define(String.prototype, "padRight", "".padEnd);
   [][key] && define(Array, key, Function.call.bind([][key]));
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"core-js/fn/regexp/escape":29,"core-js/shim":351,"regenerator-runtime/runtime":364}],27:[function(require,module,exports){
+},{"core-js/fn/regexp/escape":29,"core-js/shim":351,"regenerator-runtime/runtime":365}],27:[function(require,module,exports){
 var document = require('global/document')
 var hyperx = require('hyperx')
 var onload = require('on-load')
@@ -1588,7 +1588,7 @@ module.exports = hyperx(belCreateElement, {comments: true})
 module.exports.default = module.exports
 module.exports.createElement = belCreateElement
 
-},{"global/document":352,"hyperx":355,"on-load":360}],28:[function(require,module,exports){
+},{"global/document":353,"hyperx":356,"on-load":361}],28:[function(require,module,exports){
 
 },{}],29:[function(require,module,exports){
 require('../../modules/core.regexp.escape');
@@ -8345,6 +8345,21 @@ require('./modules/web.dom.iterable');
 module.exports = require('./modules/_core');
 
 },{"./modules/_core":50,"./modules/es6.array.copy-within":155,"./modules/es6.array.every":156,"./modules/es6.array.fill":157,"./modules/es6.array.filter":158,"./modules/es6.array.find":160,"./modules/es6.array.find-index":159,"./modules/es6.array.for-each":161,"./modules/es6.array.from":162,"./modules/es6.array.index-of":163,"./modules/es6.array.is-array":164,"./modules/es6.array.iterator":165,"./modules/es6.array.join":166,"./modules/es6.array.last-index-of":167,"./modules/es6.array.map":168,"./modules/es6.array.of":169,"./modules/es6.array.reduce":171,"./modules/es6.array.reduce-right":170,"./modules/es6.array.slice":172,"./modules/es6.array.some":173,"./modules/es6.array.sort":174,"./modules/es6.array.species":175,"./modules/es6.date.now":176,"./modules/es6.date.to-iso-string":177,"./modules/es6.date.to-json":178,"./modules/es6.date.to-primitive":179,"./modules/es6.date.to-string":180,"./modules/es6.function.bind":181,"./modules/es6.function.has-instance":182,"./modules/es6.function.name":183,"./modules/es6.map":184,"./modules/es6.math.acosh":185,"./modules/es6.math.asinh":186,"./modules/es6.math.atanh":187,"./modules/es6.math.cbrt":188,"./modules/es6.math.clz32":189,"./modules/es6.math.cosh":190,"./modules/es6.math.expm1":191,"./modules/es6.math.fround":192,"./modules/es6.math.hypot":193,"./modules/es6.math.imul":194,"./modules/es6.math.log10":195,"./modules/es6.math.log1p":196,"./modules/es6.math.log2":197,"./modules/es6.math.sign":198,"./modules/es6.math.sinh":199,"./modules/es6.math.tanh":200,"./modules/es6.math.trunc":201,"./modules/es6.number.constructor":202,"./modules/es6.number.epsilon":203,"./modules/es6.number.is-finite":204,"./modules/es6.number.is-integer":205,"./modules/es6.number.is-nan":206,"./modules/es6.number.is-safe-integer":207,"./modules/es6.number.max-safe-integer":208,"./modules/es6.number.min-safe-integer":209,"./modules/es6.number.parse-float":210,"./modules/es6.number.parse-int":211,"./modules/es6.number.to-fixed":212,"./modules/es6.number.to-precision":213,"./modules/es6.object.assign":214,"./modules/es6.object.create":215,"./modules/es6.object.define-properties":216,"./modules/es6.object.define-property":217,"./modules/es6.object.freeze":218,"./modules/es6.object.get-own-property-descriptor":219,"./modules/es6.object.get-own-property-names":220,"./modules/es6.object.get-prototype-of":221,"./modules/es6.object.is":225,"./modules/es6.object.is-extensible":222,"./modules/es6.object.is-frozen":223,"./modules/es6.object.is-sealed":224,"./modules/es6.object.keys":226,"./modules/es6.object.prevent-extensions":227,"./modules/es6.object.seal":228,"./modules/es6.object.set-prototype-of":229,"./modules/es6.object.to-string":230,"./modules/es6.parse-float":231,"./modules/es6.parse-int":232,"./modules/es6.promise":233,"./modules/es6.reflect.apply":234,"./modules/es6.reflect.construct":235,"./modules/es6.reflect.define-property":236,"./modules/es6.reflect.delete-property":237,"./modules/es6.reflect.enumerate":238,"./modules/es6.reflect.get":241,"./modules/es6.reflect.get-own-property-descriptor":239,"./modules/es6.reflect.get-prototype-of":240,"./modules/es6.reflect.has":242,"./modules/es6.reflect.is-extensible":243,"./modules/es6.reflect.own-keys":244,"./modules/es6.reflect.prevent-extensions":245,"./modules/es6.reflect.set":247,"./modules/es6.reflect.set-prototype-of":246,"./modules/es6.regexp.constructor":248,"./modules/es6.regexp.flags":249,"./modules/es6.regexp.match":250,"./modules/es6.regexp.replace":251,"./modules/es6.regexp.search":252,"./modules/es6.regexp.split":253,"./modules/es6.regexp.to-string":254,"./modules/es6.set":255,"./modules/es6.string.anchor":256,"./modules/es6.string.big":257,"./modules/es6.string.blink":258,"./modules/es6.string.bold":259,"./modules/es6.string.code-point-at":260,"./modules/es6.string.ends-with":261,"./modules/es6.string.fixed":262,"./modules/es6.string.fontcolor":263,"./modules/es6.string.fontsize":264,"./modules/es6.string.from-code-point":265,"./modules/es6.string.includes":266,"./modules/es6.string.italics":267,"./modules/es6.string.iterator":268,"./modules/es6.string.link":269,"./modules/es6.string.raw":270,"./modules/es6.string.repeat":271,"./modules/es6.string.small":272,"./modules/es6.string.starts-with":273,"./modules/es6.string.strike":274,"./modules/es6.string.sub":275,"./modules/es6.string.sup":276,"./modules/es6.string.trim":277,"./modules/es6.symbol":278,"./modules/es6.typed.array-buffer":279,"./modules/es6.typed.data-view":280,"./modules/es6.typed.float32-array":281,"./modules/es6.typed.float64-array":282,"./modules/es6.typed.int16-array":283,"./modules/es6.typed.int32-array":284,"./modules/es6.typed.int8-array":285,"./modules/es6.typed.uint16-array":286,"./modules/es6.typed.uint32-array":287,"./modules/es6.typed.uint8-array":288,"./modules/es6.typed.uint8-clamped-array":289,"./modules/es6.weak-map":290,"./modules/es6.weak-set":291,"./modules/es7.array.flat-map":292,"./modules/es7.array.flatten":293,"./modules/es7.array.includes":294,"./modules/es7.asap":295,"./modules/es7.error.is-error":296,"./modules/es7.global":297,"./modules/es7.map.from":298,"./modules/es7.map.of":299,"./modules/es7.map.to-json":300,"./modules/es7.math.clamp":301,"./modules/es7.math.deg-per-rad":302,"./modules/es7.math.degrees":303,"./modules/es7.math.fscale":304,"./modules/es7.math.iaddh":305,"./modules/es7.math.imulh":306,"./modules/es7.math.isubh":307,"./modules/es7.math.rad-per-deg":308,"./modules/es7.math.radians":309,"./modules/es7.math.scale":310,"./modules/es7.math.signbit":311,"./modules/es7.math.umulh":312,"./modules/es7.object.define-getter":313,"./modules/es7.object.define-setter":314,"./modules/es7.object.entries":315,"./modules/es7.object.get-own-property-descriptors":316,"./modules/es7.object.lookup-getter":317,"./modules/es7.object.lookup-setter":318,"./modules/es7.object.values":319,"./modules/es7.observable":320,"./modules/es7.promise.finally":321,"./modules/es7.promise.try":322,"./modules/es7.reflect.define-metadata":323,"./modules/es7.reflect.delete-metadata":324,"./modules/es7.reflect.get-metadata":326,"./modules/es7.reflect.get-metadata-keys":325,"./modules/es7.reflect.get-own-metadata":328,"./modules/es7.reflect.get-own-metadata-keys":327,"./modules/es7.reflect.has-metadata":329,"./modules/es7.reflect.has-own-metadata":330,"./modules/es7.reflect.metadata":331,"./modules/es7.set.from":332,"./modules/es7.set.of":333,"./modules/es7.set.to-json":334,"./modules/es7.string.at":335,"./modules/es7.string.match-all":336,"./modules/es7.string.pad-end":337,"./modules/es7.string.pad-start":338,"./modules/es7.string.trim-left":339,"./modules/es7.string.trim-right":340,"./modules/es7.symbol.async-iterator":341,"./modules/es7.symbol.observable":342,"./modules/es7.system.global":343,"./modules/es7.weak-map.from":344,"./modules/es7.weak-map.of":345,"./modules/es7.weak-set.from":346,"./modules/es7.weak-set.of":347,"./modules/web.dom.iterable":348,"./modules/web.immediate":349,"./modules/web.timers":350}],352:[function(require,module,exports){
+/* global HTMLElement */
+
+'use strict'
+
+module.exports = function emptyElement (element) {
+  if (!(element instanceof HTMLElement)) {
+    throw new TypeError('Expected an element')
+  }
+
+  var node
+  while ((node = element.lastChild)) element.removeChild(node)
+  return element
+}
+
+},{}],353:[function(require,module,exports){
 (function (global){
 var topLevel = typeof global !== 'undefined' ? global :
     typeof window !== 'undefined' ? window : {}
@@ -8365,7 +8380,7 @@ if (typeof document !== 'undefined') {
 module.exports = doccy;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"min-document":28}],353:[function(require,module,exports){
+},{"min-document":28}],354:[function(require,module,exports){
 (function (global){
 var win;
 
@@ -8382,7 +8397,7 @@ if (typeof window !== "undefined") {
 module.exports = win;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],354:[function(require,module,exports){
+},{}],355:[function(require,module,exports){
 module.exports = attributeToProperty
 
 var transform = {
@@ -8403,7 +8418,7 @@ function attributeToProperty (h) {
   }
 }
 
-},{}],355:[function(require,module,exports){
+},{}],356:[function(require,module,exports){
 var attrToProp = require('hyperscript-attribute-to-property')
 
 var VAR = 0, TEXT = 1, OPEN = 2, CLOSE = 3, ATTR = 4
@@ -8683,7 +8698,7 @@ var closeRE = RegExp('^(' + [
 ].join('|') + ')(?:[\.#][a-zA-Z0-9\u007F-\uFFFF_:-]+)*$')
 function selfClosing (tag) { return closeRE.test(tag) }
 
-},{"hyperscript-attribute-to-property":354}],356:[function(require,module,exports){
+},{"hyperscript-attribute-to-property":355}],357:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -8706,12 +8721,12 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],357:[function(require,module,exports){
+},{}],358:[function(require,module,exports){
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-},{}],358:[function(require,module,exports){
+},{}],359:[function(require,module,exports){
 'use strict';
 
 var range; // Create a range object for efficently rendering strings to elements.
@@ -9395,7 +9410,7 @@ var morphdom = morphdomFactory(morphAttrs);
 
 module.exports = morphdom;
 
-},{}],359:[function(require,module,exports){
+},{}],360:[function(require,module,exports){
 assert.notEqual = notEqual
 assert.notOk = notOk
 assert.equal = equal
@@ -9419,7 +9434,7 @@ function assert (t, m) {
   if (!t) throw new Error(m || 'AssertionError')
 }
 
-},{}],360:[function(require,module,exports){
+},{}],361:[function(require,module,exports){
 /* global MutationObserver */
 var document = require('global/document')
 var window = require('global/window')
@@ -9523,7 +9538,7 @@ function eachMutation (nodes, fn) {
   }
 }
 
-},{"assert":359,"global/document":352,"global/window":353}],361:[function(require,module,exports){
+},{"assert":360,"global/document":353,"global/window":354}],362:[function(require,module,exports){
 (function (process){
   /* globals require, module */
 
@@ -10149,7 +10164,7 @@ function eachMutation (nodes, fn) {
   page.sameOrigin = sameOrigin;
 
 }).call(this,require('_process'))
-},{"_process":363,"path-to-regexp":362}],362:[function(require,module,exports){
+},{"_process":364,"path-to-regexp":363}],363:[function(require,module,exports){
 var isarray = require('isarray')
 
 /**
@@ -10541,7 +10556,7 @@ function pathToRegexp (path, keys, options) {
   return stringToRegexp(path, keys, options)
 }
 
-},{"isarray":357}],363:[function(require,module,exports){
+},{"isarray":358}],364:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -10727,7 +10742,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],364:[function(require,module,exports){
+},{}],365:[function(require,module,exports){
 (function (global){
 /**
  * Copyright (c) 2014, Facebook, Inc.
@@ -11467,7 +11482,7 @@ process.umask = function() { return 0; };
 );
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],365:[function(require,module,exports){
+},{}],366:[function(require,module,exports){
 
 var orig = document.title;
 
@@ -11490,7 +11505,7 @@ exports.reset = function(){
   set(orig);
 };
 
-},{}],366:[function(require,module,exports){
+},{}],367:[function(require,module,exports){
 var bel = require('bel') // turns template tag into DOM elements
 var morphdom = require('morphdom') // efficiently diffs + morphs two DOM elements
 var defaultEvents = require('./update-events.js') // default events to be copied when dom elements update
@@ -11534,7 +11549,7 @@ module.exports.update = function (fromNode, toNode, opts) {
   }
 }
 
-},{"./update-events.js":367,"bel":27,"morphdom":358}],367:[function(require,module,exports){
+},{"./update-events.js":368,"bel":27,"morphdom":359}],368:[function(require,module,exports){
 module.exports = [
   // attribute events (can be set with attributes)
   'onclick',
@@ -11572,12 +11587,13 @@ module.exports = [
   'onfocusout'
 ]
 
-},{}],368:[function(require,module,exports){
+},{}],369:[function(require,module,exports){
 'use strict';
 
-// Para ver el depurador:
-// js.src = "//connect.facebook.net/en_US/sdk/debug.js"
-// Versión 2.10 - Sep 30 2017
+/*  Para ver el depurador:
+ *  js.src = "//connect.facebook.net/en_US/sdk/debug.js"
+ *  Versión 2.10 - Sep 30 2017
+ */
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -11611,7 +11627,7 @@ function sdkFacebook() {
   });
 }
 
-},{}],369:[function(require,module,exports){
+},{}],370:[function(require,module,exports){
 'use strict';
 
 var _page = require('page');
@@ -11639,7 +11655,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   });
 });
 
-},{"./template":370,"page":361,"title":365}],370:[function(require,module,exports){
+},{"./template":371,"page":362,"title":366}],371:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11656,7 +11672,7 @@ exports.default = {
   landing: _landing2.default
 };
 
-},{"./landing":371}],371:[function(require,module,exports){
+},{"./landing":372}],372:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11680,7 +11696,7 @@ function landing() {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],372:[function(require,module,exports){
+},{"yo-yo":367}],373:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11697,7 +11713,7 @@ exports.default = {
   saveArt: _saveArt2.default
 };
 
-},{"./save-art":373}],373:[function(require,module,exports){
+},{"./save-art":374}],374:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11755,14 +11771,14 @@ function saveArt(ev) {
   });
 }
 
-},{"../data-comm/send-art":374}],374:[function(require,module,exports){
+},{"../data-comm/send-art":375}],375:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n        <li id="', '" class="collection-item avatar" style="background-color: #EF6C35; transition: all .8s ease;">\n          <img src="', '" alt="imagen de perfil" class="circle">\n          <span class="title">', '</span>\n          <p>Autor: ', '<br>\n            <a href="', '">Publicaci\xF3n en facebook</a>\n          </p>\n          <a href="#!" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>\n          <a href="#!" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>\n        </li>\n      '], ['\n        <li id="', '" class="collection-item avatar" style="background-color: #EF6C35; transition: all .8s ease;">\n          <img src="', '" alt="imagen de perfil" class="circle">\n          <span class="title">', '</span>\n          <p>Autor: ', '<br>\n            <a href="', '">Publicaci\xF3n en facebook</a>\n          </p>\n          <a href="#!" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>\n          <a href="#!" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>\n        </li>\n      ']);
+var _templateObject = _taggedTemplateLiteral(['\n        <li id="', '" class="collection-item avatar" style="background-color: #EF6C35; transition: all .8s ease;">\n          <img src="', '" alt="imagen de perfil" class="circle">\n          <span class="title">', '</span>\n          <p>Autor: ', '<br>\n            <a href="', '">Publicaci\xF3n en facebook</a>\n          </p>\n          <a href="/paper/', '" target="_self" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>\n          <a href="/paper/edit/', '" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>\n        </li>\n      '], ['\n        <li id="', '" class="collection-item avatar" style="background-color: #EF6C35; transition: all .8s ease;">\n          <img src="', '" alt="imagen de perfil" class="circle">\n          <span class="title">', '</span>\n          <p>Autor: ', '<br>\n            <a href="', '">Publicaci\xF3n en facebook</a>\n          </p>\n          <a href="/paper/', '" target="_self" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>\n          <a href="/paper/edit/', '" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>\n        </li>\n      ']);
 
 exports.default = sendArt;
 
@@ -11780,15 +11796,14 @@ function sendArt(data, user) {
     method: 'POST',
     url: '/user/folder/add-paper',
     data: data
-  }).done(function (data) {
+  }).done(function (res) {
     console.log('%c Almacenado', 'color: #3c86e6; font-size: 10px');
-    console.log('%c ' + data, 'color: green; font-size: 10px');
 
     var newId = 'li_' + Math.floor(Math.random() * 20 + 6);
     var $form = $('#addArtContent');
     $('ul.tabs').tabs('select_tab', 'listArts');
 
-    var temp = (0, _yoYo2.default)(_templateObject, newId, user.profile_image, data.title.substr(0, 38), user.name, data.face_link);
+    var temp = (0, _yoYo2.default)(_templateObject, newId, res.user.profile_image, res.title.substr(0, 23), res.user.name, res.face_link, res.exposedId, res.exposedId);
 
     $('#list_for_arts').prepend(temp);
     $form.find('#title').val('');
@@ -11809,7 +11824,7 @@ function sendArt(data, user) {
   });
 }
 
-},{"yo-yo":366}],375:[function(require,module,exports){
+},{"yo-yo":367}],376:[function(require,module,exports){
 'use strict';
 
 var _page = require('page');
@@ -11819,6 +11834,10 @@ var _page2 = _interopRequireDefault(_page);
 var _title = require('title');
 
 var _title2 = _interopRequireDefault(_title);
+
+var _emptyElement = require('empty-element');
+
+var _emptyElement2 = _interopRequireDefault(_emptyElement);
 
 var _template = require('./template');
 
@@ -11852,7 +11871,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     };
     var $main = $('#main-container');
     (0, _title2.default)('Portafolio');
-    $main.empty().append((0, _template2.default)(data));
+    (0, _emptyElement2.default)($main).append((0, _template2.default)(data));
 
     // Materialize components
     $('ul.tabs').tabs();
@@ -11866,7 +11885,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   });
 });
 
-},{"../header":383,"../utils/data-center":396,"./animations":372,"./modals":377,"./template":379,"page":361,"title":365}],376:[function(require,module,exports){
+},{"../header":384,"../utils/data-center":399,"./animations":373,"./modals":378,"./template":380,"empty-element":352,"page":362,"title":366}],377:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11890,7 +11909,7 @@ function help(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],377:[function(require,module,exports){
+},{"yo-yo":367}],378:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11907,7 +11926,7 @@ exports.default = {
   help: _help2.default
 };
 
-},{"./help":376}],378:[function(require,module,exports){
+},{"./help":377}],379:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11931,14 +11950,14 @@ function formNewArt(user) {
   return (0, _yoYo2.default)(_templateObject, user.name);
 }
 
-},{"yo-yo":366}],379:[function(require,module,exports){
+},{"yo-yo":367}],380:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    <div class="folder-container row">\n      <ul id="tabs-swipe-demo" class="tabs">\n        <li class="tab col s6"><a class="active" href="#listArts">Art\xEDculos</a></li>\n        <li class="tab col s6"><a href="#formAdd">Publicar</a></li>\n      </ul>\n      <div id="listArts" class="col s12">', '</div>\n      <div id="formAdd" class="col s12">', '</div>\n    </div>\n  '], ['\n    <div class="folder-container row">\n      <ul id="tabs-swipe-demo" class="tabs">\n        <li class="tab col s6"><a class="active" href="#listArts">Art\xEDculos</a></li>\n        <li class="tab col s6"><a href="#formAdd">Publicar</a></li>\n      </ul>\n      <div id="listArts" class="col s12">', '</div>\n      <div id="formAdd" class="col s12">', '</div>\n    </div>\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n    <div class="folder-container row">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a class="breadcrumb-ref blue-text text-lighten-3">Tus publicaciones</a>\n          </div>\n        </div>\n      </nav>\n      <ul id="tabs-swipe-demo" class="tabs">\n        <li class="tab col s6"><a class="active" href="#listArts">Art\xEDculos</a></li>\n        <li class="tab col s6"><a href="#formAdd">Publicar</a></li>\n      </ul>\n      <div id="listArts" class="col s12">', '</div>\n      <div id="formAdd" class="col s12">', '</div>\n    </div>\n  '], ['\n    <div class="folder-container row">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a class="breadcrumb-ref blue-text text-lighten-3">Tus publicaciones</a>\n          </div>\n        </div>\n      </nav>\n      <ul id="tabs-swipe-demo" class="tabs">\n        <li class="tab col s6"><a class="active" href="#listArts">Art\xEDculos</a></li>\n        <li class="tab col s6"><a href="#formAdd">Publicar</a></li>\n      </ul>\n      <div id="listArts" class="col s12">', '</div>\n      <div id="formAdd" class="col s12">', '</div>\n    </div>\n  ']);
 
 exports.default = template;
 
@@ -11965,7 +11984,7 @@ function template(data) {
   return (0, _yoYo2.default)(_templateObject, (0, _list2.default)(data.arts), (0, _formAdd2.default)(data.user));
 }
 
-},{"./form-add":378,"./list":380,"yo-yo":366}],380:[function(require,module,exports){
+},{"./form-add":379,"./list":381,"yo-yo":367}],381:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11974,7 +11993,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _templateObject = _taggedTemplateLiteral(['\n    <ul class="collection" id="list_for_arts">\n      ', '\n    </ul>\n  '], ['\n    <ul class="collection" id="list_for_arts">\n      ', '\n    </ul>\n  ']),
     _templateObject2 = _taggedTemplateLiteral(['<li id="msg_empty" class="collection-item avatar">\n        A\xFAn no has subido ning\xFAn art\xEDculo. Int\xE9ntalo en la pesta\xF1a PUBLICAR <i class="ion-arrow-up-c"></i>\n        </li>'], ['<li id="msg_empty" class="collection-item avatar">\n        A\xFAn no has subido ning\xFAn art\xEDculo. Int\xE9ntalo en la pesta\xF1a PUBLICAR <i class="ion-arrow-up-c"></i>\n        </li>']),
-    _templateObject3 = _taggedTemplateLiteral(['\n          <li class="collection-item avatar">\n            <img src="', '" alt="imagen de perfil" class="circle">\n            <span class="title">', '</span>\n            <p>Autor: ', '<br>\n              <a href="', '">Publicaci\xF3n en facebook</a>\n            </p>\n            <a href="#!" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>\n            <a href="#!" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>\n          </li>\n        '], ['\n          <li class="collection-item avatar">\n            <img src="', '" alt="imagen de perfil" class="circle">\n            <span class="title">', '</span>\n            <p>Autor: ', '<br>\n              <a href="', '">Publicaci\xF3n en facebook</a>\n            </p>\n            <a href="#!" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>\n            <a href="#!" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>\n          </li>\n        ']);
+    _templateObject3 = _taggedTemplateLiteral(['\n          <li class="collection-item avatar">\n            <img src="', '" alt="imagen de perfil" class="circle">\n            <span class="title">', '</span>\n            <p>Autor: ', '<br>\n              <a href="', '">Publicaci\xF3n en facebook</a>\n            </p>\n            <a href="/paper/', '" target="_self" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>\n            <a href="/paper/edit/', '" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>\n          </li>\n        '], ['\n          <li class="collection-item avatar">\n            <img src="', '" alt="imagen de perfil" class="circle">\n            <span class="title">', '</span>\n            <p>Autor: ', '<br>\n              <a href="', '">Publicaci\xF3n en facebook</a>\n            </p>\n            <a href="/paper/', '" target="_self" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>\n            <a href="/paper/edit/', '" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>\n          </li>\n        ']);
 
 exports.default = list;
 
@@ -12003,7 +12022,7 @@ function makeList(arr) {
 
       for (var i = 0; i < arr.length; i++) {
         var el = arr[i];
-        var temp = (0, _yoYo2.default)(_templateObject3, el.user.profile_image, el.title.substr(0, 38), el.user.name, el.face_link);
+        var temp = (0, _yoYo2.default)(_templateObject3, el.user.profile_image, el.title.substr(0, 23), el.user.name, el.face_link, el.exposedId, el.exposedId);
 
         $('#list_for_arts').append(temp);
       }
@@ -12011,7 +12030,7 @@ function makeList(arr) {
   }, 1000);
 }
 
-},{"yo-yo":366}],381:[function(require,module,exports){
+},{"yo-yo":367}],382:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12028,7 +12047,7 @@ exports.default = {
   init: _init2.default
 };
 
-},{"./init":382}],382:[function(require,module,exports){
+},{"./init":383}],383:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12050,10 +12069,12 @@ function init() {
     // Night and day transition
     if ($(document).scrollTop() > 1350) {
       $('body').css('background-color', '#161C2E');
+      $('p').css('color', 'white');
     }
 
     if ($(document).scrollTop() < 1351) {
       $('body').css('background-color', '#FFF5F5');
+      $('p').css('color', 'black');
     }
 
     // brand-logo change icon
@@ -12063,9 +12084,34 @@ function init() {
       $('.brand-logo.margin-12-12 i.hello-world').removeClass('ion-code-working faa-tada animated').addClass('ion-arrow-up-a');
     }
   });
+
+  // User menu
+  $('.dropdown-button.profile-img').on('click', function (ev) {
+    ev.preventDefault();
+    var $umenu = $('#userOptions');
+
+    if ($umenu.hasClass('active')) {
+      $umenu.css({
+        'transform': 'translateX(150px)'
+      });
+    } else {
+      $umenu.css({
+        'transform': 'translateX(0px)'
+      });
+    }
+
+    $umenu.toggleClass('active');
+
+    $(this).blur(function () {
+      $umenu.css({
+        'transform': 'translateX(150px)'
+      });
+      $umenu.removeClass('active');
+    });
+  });
 }
 
-},{}],383:[function(require,module,exports){
+},{}],384:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12101,17 +12147,6 @@ function header(ctx, next) {
     offset: 0
   });
 
-  $(".dropdown-button").dropdown({
-    inDuration: 300,
-    outDuration: 225,
-    constrainWidth: false,
-    hover: true,
-    gutter: 0,
-    belowOrigin: true,
-    alignment: 'right',
-    stopPropagation: false
-  });
-
   $('#modals-container').empty().append(_modal2.default.login());
 
   $('.modal').modal();
@@ -12122,7 +12157,7 @@ function header(ctx, next) {
   next();
 }
 
-},{"./animations":381,"./modal":384,"./template":386,"yo-yo":366}],384:[function(require,module,exports){
+},{"./animations":382,"./modal":385,"./template":387,"yo-yo":367}],385:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12139,7 +12174,7 @@ exports.default = {
   login: _modalLogin2.default
 };
 
-},{"./modal-login":385}],385:[function(require,module,exports){
+},{"./modal-login":386}],386:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12163,16 +12198,16 @@ function login(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],386:[function(require,module,exports){
+},{"yo-yo":367}],387:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['<a class="dropdown-button profile-img" data-activates="user_options"><img src="', '" alt="profile image"></a>'], ['<a class="dropdown-button profile-img" data-activates="user_options"><img src="', '" alt="profile image"></a>']),
+var _templateObject = _taggedTemplateLiteral(['<a class="dropdown-button profile-img" href="#"><img src="', '" alt="profile image"></a>'], ['<a class="dropdown-button profile-img" href="#"><img src="', '" alt="profile image"></a>']),
     _templateObject2 = _taggedTemplateLiteral(['<a class="waves-effect btn-floating btn-flat" href="#modal_login"><i class="ion-person"></i></a>'], ['<a class="waves-effect btn-floating btn-flat" href="#modal_login"><i class="ion-person"></i></a>']),
-    _templateObject3 = _taggedTemplateLiteral(['\n    <div>\n      <nav class="pushpin-nav pinned target" data-target="blue" style="top: 0px;">\n        <div class="nav-wrapper">\n          <a href="#header-container" class="left hide-on-large-only waves-effect btn-floating btn-flat brand-logo margin-12-12"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <a href="#header-container" class="left hide-on-med-and-down waves-effect center btn-floating btn-flat brand-logo margin-12-12"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <ul class="right">\n            <li><a href="sass.html">Contenido</a></li>\n            <li><a href="badges.html">Contacto</a></li>\n            <!-- Dropdown Trigger -->\n            <li>', '</li>\n          </ul>\n        </div>\n      </nav>\n\n      <!-- Dropdown Structure -->\n      <ul id="user_options" class="dropdown-content">\n        <li><a href="/user/folder">Portafolio</a></li>\n        <li class="divider"></li>\n        <li><a href="/logout">Cerrar sesi\xF3n</a></li>\n      </ul>\n\n    </div>\n  '], ['\n    <div>\n      <nav class="pushpin-nav pinned target" data-target="blue" style="top: 0px;">\n        <div class="nav-wrapper">\n          <a href="#header-container" class="left hide-on-large-only waves-effect btn-floating btn-flat brand-logo margin-12-12"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <a href="#header-container" class="left hide-on-med-and-down waves-effect center btn-floating btn-flat brand-logo margin-12-12"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <ul class="right">\n            <li><a href="sass.html">Contenido</a></li>\n            <li><a href="badges.html">Contacto</a></li>\n            <!-- Dropdown Trigger -->\n            <li>', '</li>\n          </ul>\n        </div>\n      </nav>\n\n      <!-- Dropdown Structure -->\n      <ul id="user_options" class="dropdown-content">\n        <li><a href="/user/folder">Portafolio</a></li>\n        <li class="divider"></li>\n        <li><a href="/logout">Cerrar sesi\xF3n</a></li>\n      </ul>\n\n    </div>\n  ']);
+    _templateObject3 = _taggedTemplateLiteral(['\n    <div>\n\n      <nav class="pushpin-nav pinned target" data-target="blue" style="top: 0px;">\n        <div class="nav-wrapper">\n          <a href="#header-container" class="left hide-on-large-only waves-effect btn-floating btn-flat brand-logo margin-12-12"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <a href="#header-container" class="left hide-on-med-and-down waves-effect center btn-floating btn-flat brand-logo margin-12-12"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <ul class="right">\n            <li><a href="sass.html">Contenido</a></li>\n            <li><a href="badges.html">Contacto</a></li>\n            <!-- Dropdown Trigger -->\n            <li>', '\n              <!-- Dropdown Structure -->\n              <ul id="userOptions" class="dropdown-content ready">\n                <li><a href="/user/folder">Portafolio</a></li>\n                <li class="divider"></li>\n                <li><a href="/logout">Cerrar sesi\xF3n</a></li>\n              </ul>\n            </li>\n          </ul>\n        </div>\n      </nav>\n      \n    </div>\n  '], ['\n    <div>\n\n      <nav class="pushpin-nav pinned target" data-target="blue" style="top: 0px;">\n        <div class="nav-wrapper">\n          <a href="#header-container" class="left hide-on-large-only waves-effect btn-floating btn-flat brand-logo margin-12-12"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <a href="#header-container" class="left hide-on-med-and-down waves-effect center btn-floating btn-flat brand-logo margin-12-12"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <ul class="right">\n            <li><a href="sass.html">Contenido</a></li>\n            <li><a href="badges.html">Contacto</a></li>\n            <!-- Dropdown Trigger -->\n            <li>', '\n              <!-- Dropdown Structure -->\n              <ul id="userOptions" class="dropdown-content ready">\n                <li><a href="/user/folder">Portafolio</a></li>\n                <li class="divider"></li>\n                <li><a href="/logout">Cerrar sesi\xF3n</a></li>\n              </ul>\n            </li>\n          </ul>\n        </div>\n      </nav>\n      \n    </div>\n  ']);
 
 exports.default = template;
 
@@ -12198,7 +12233,7 @@ function template(opts) {
   return (0, _yoYo2.default)(_templateObject3, btnLogin);
 }
 
-},{"yo-yo":366}],387:[function(require,module,exports){
+},{"yo-yo":367}],388:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12209,26 +12244,23 @@ function aparitionToCenter() {
   // This element should be a jquery object
   var $two = $('.section-two .box-image');
   var $three = $('.section-three .box-image');
+  $two.addClass('moveLeft');
+  $three.addClass('moveRight');
 
   var options = [{
     selector: '.section-two .box-image', offset: 180, callback: function callback() {
-      $two.css({
-        'transform': 'translateX(0%)',
-        'opacity': '1'
-      });
+      $two.removeClass('moveLeft');
     }
   }, {
     selector: '.section-three .box-image', offset: 350, callback: function callback() {
-      $three.css({
-        'transform': 'translateX(0%)',
-        'opacity': '1'
-      });
+      $three.removeClass('moveRight');
     }
   }];
+
   Materialize.scrollFire(options);
 }
 
-},{}],388:[function(require,module,exports){
+},{}],389:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12245,7 +12277,7 @@ exports.default = {
   aparitionToCenter: _aparitions2.default
 };
 
-},{"./aparitions":387}],389:[function(require,module,exports){
+},{"./aparitions":388}],390:[function(require,module,exports){
 'use strict';
 
 var _page = require('page');
@@ -12255,6 +12287,10 @@ var _page2 = _interopRequireDefault(_page);
 var _title = require('title');
 
 var _title2 = _interopRequireDefault(_title);
+
+var _emptyElement = require('empty-element');
+
+var _emptyElement2 = _interopRequireDefault(_emptyElement);
 
 var _template = require('./template');
 
@@ -12280,7 +12316,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
     var $main = $('#main-container');
     (0, _title2.default)('Parques Girardot');
-    $main.empty().append((0, _template2.default)());
+    (0, _emptyElement2.default)($main).append((0, _template2.default)());
 
     // Materialize components
     $('.materialboxed').materialbox();
@@ -12289,7 +12325,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   });
 });
 
-},{"../header":383,"../utils/data-center":396,"./animations":388,"./template":391,"page":361,"title":365}],390:[function(require,module,exports){
+},{"../header":384,"../utils/data-center":399,"./animations":389,"./template":392,"empty-element":352,"page":362,"title":366}],391:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12313,14 +12349,14 @@ function carouselTemp(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],391:[function(require,module,exports){
+},{"yo-yo":367}],392:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    <div class="home-container">\n       ', '\n      <div class="divider home-divider"></div>\n       ', '\n      <div class="divider home-divider"></div>\n       ', '\n    </div>\n  '], ['\n    <div class="home-container">\n       ', '\n      <div class="divider home-divider"></div>\n       ', '\n      <div class="divider home-divider"></div>\n       ', '\n    </div>\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n    <div class="home-container">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a class="breadcrumb-ref blue-text text-lighten-3">Principal</a>\n          </div>\n        </div>\n      </nav>\n       ', '\n      <div class="divider home-divider"></div>\n       ', '\n      <div class="divider home-divider"></div>\n       ', '\n    </div>\n  '], ['\n    <div class="home-container">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a class="breadcrumb-ref blue-text text-lighten-3">Principal</a>\n          </div>\n        </div>\n      </nav>\n       ', '\n      <div class="divider home-divider"></div>\n       ', '\n      <div class="divider home-divider"></div>\n       ', '\n    </div>\n  ']);
 
 exports.default = template;
 
@@ -12349,7 +12385,7 @@ function template() {
   return (0, _yoYo2.default)(_templateObject, (0, _sect2.default)(), (0, _sect4.default)(), (0, _sect6.default)());
 }
 
-},{"./sect-1":392,"./sect-2":393,"./sect-3":394,"yo-yo":366}],392:[function(require,module,exports){
+},{"./sect-1":393,"./sect-2":394,"./sect-3":395,"yo-yo":367}],393:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12377,14 +12413,14 @@ function sectOne(opts) {
   return (0, _yoYo2.default)(_templateObject, (0, _carousel2.default)());
 }
 
-},{"./carousel":390,"yo-yo":366}],393:[function(require,module,exports){
+},{"./carousel":391,"yo-yo":367}],394:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n      <div class="row section-two">\n        <div class="row box-image">\n          <div class="col s12 l8 m6 hide-on-large-only">\n            <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">\n          </div>\n          <div class="col s12 l4 m6">\n            <div class="hide-on-large-only intro-container info-pub">\n              <h5>La tranquilidad para una tarde en familia</h5>\n              <p>\n                Entre las personas que llegan para estar, \n                las familiar son m\xE1s comunes en este sitio, por ende, la\n                iluminaci\xF3n debe ser un factor que de vida aqu\xED en las noches...\n                <br>\n                <a href="#" class="waves-effect waves-teal btn-flat btn-more-info">Ver completo <i class="ion-ios-paper-outline"></i></a>\n              </p>\n            </div>\n            <div class="hide-on-med-and-down intro-container info-pub">\n              <h5>La tranquilidad para una tarde en familia</h5>\n              <p>\n                Entre las personas que llegan para estar, \n                las familiar son m\xE1s comunes en este sitio, por ende, la\n                iluminaci\xF3n debe ser un factor que de vida aqu\xED en las noches...\n                <br>\n                <a href="#" class="waves-effect waves-teal btn-flat btn-more-info">Ver completo <i class="ion-ios-paper-outline"></i></a>\n              </p>\n            </div>\n          </div>\n          <div class="col s12 l8 m6 hide-on-med-and-down">\n            <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">\n          </div>\n        </div>\n        <div class="row">\n          <div class="comments-container">\n            <span class="txt-for-fb">Tu opini\xF3n es muy valiosa para la comunidad</h5>\n            <div data-width="100%" class="fb-comments" data-href="https://www.facebook.com/JeissonValde/posts/1321623704629726?pnref=story" data-numposts="5"></div>\n          </div>\n        </div>\n      </div>\n  '], ['\n      <div class="row section-two">\n        <div class="row box-image">\n          <div class="col s12 l8 m6 hide-on-large-only">\n            <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">\n          </div>\n          <div class="col s12 l4 m6">\n            <div class="hide-on-large-only intro-container info-pub">\n              <h5>La tranquilidad para una tarde en familia</h5>\n              <p>\n                Entre las personas que llegan para estar, \n                las familiar son m\xE1s comunes en este sitio, por ende, la\n                iluminaci\xF3n debe ser un factor que de vida aqu\xED en las noches...\n                <br>\n                <a href="#" class="waves-effect waves-teal btn-flat btn-more-info">Ver completo <i class="ion-ios-paper-outline"></i></a>\n              </p>\n            </div>\n            <div class="hide-on-med-and-down intro-container info-pub">\n              <h5>La tranquilidad para una tarde en familia</h5>\n              <p>\n                Entre las personas que llegan para estar, \n                las familiar son m\xE1s comunes en este sitio, por ende, la\n                iluminaci\xF3n debe ser un factor que de vida aqu\xED en las noches...\n                <br>\n                <a href="#" class="waves-effect waves-teal btn-flat btn-more-info">Ver completo <i class="ion-ios-paper-outline"></i></a>\n              </p>\n            </div>\n          </div>\n          <div class="col s12 l8 m6 hide-on-med-and-down">\n            <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">\n          </div>\n        </div>\n        <div class="row">\n          <div class="comments-container">\n            <span class="txt-for-fb">Tu opini\xF3n es muy valiosa para la comunidad</h5>\n            <div data-width="100%" class="fb-comments" data-href="https://www.facebook.com/JeissonValde/posts/1321623704629726?pnref=story" data-numposts="5"></div>\n          </div>\n        </div>\n      </div>\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n      <div class="row section-two">\n        <div class="row box-image">\n          <div class="col s12 l8 m6 hide-on-large-only">\n            <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">\n          </div>\n          <div class="col s12 l4 m6">\n            <div class="hide-on-large-only intro-container info-pub">\n              <h5>La tranquilidad para una tarde en familia</h5>\n              <p>\n                Entre las personas que llegan para estar, \n                las familiar son m\xE1s comunes en este sitio, por ende, la\n                iluminaci\xF3n debe ser un factor que de vida aqu\xED en las noches...\n                <br>\n                <a href="#" class="waves-effect waves-teal btn-flat btn-more-info">Ver completo <i class="ion-ios-paper-outline"></i></a>\n              </p>\n            </div>\n            <div class="hide-on-med-and-down intro-container info-pub">\n              <h5>La tranquilidad para una tarde en familia</h5>\n              <p>\n                Entre las personas que llegan para estar, \n                las familiar son m\xE1s comunes en este sitio, por ende, la\n                iluminaci\xF3n debe ser un factor que de vida aqu\xED en las noches...\n                <br>\n                <a href="#" class="waves-effect waves-teal btn-flat btn-more-info">Ver completo <i class="ion-ios-paper-outline"></i></a>\n              </p>\n            </div>\n          </div>\n          <div class="col s12 l8 m6 hide-on-med-and-down">\n            <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">\n          </div>\n        </div>\n      </div>\n  '], ['\n      <div class="row section-two">\n        <div class="row box-image">\n          <div class="col s12 l8 m6 hide-on-large-only">\n            <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">\n          </div>\n          <div class="col s12 l4 m6">\n            <div class="hide-on-large-only intro-container info-pub">\n              <h5>La tranquilidad para una tarde en familia</h5>\n              <p>\n                Entre las personas que llegan para estar, \n                las familiar son m\xE1s comunes en este sitio, por ende, la\n                iluminaci\xF3n debe ser un factor que de vida aqu\xED en las noches...\n                <br>\n                <a href="#" class="waves-effect waves-teal btn-flat btn-more-info">Ver completo <i class="ion-ios-paper-outline"></i></a>\n              </p>\n            </div>\n            <div class="hide-on-med-and-down intro-container info-pub">\n              <h5>La tranquilidad para una tarde en familia</h5>\n              <p>\n                Entre las personas que llegan para estar, \n                las familiar son m\xE1s comunes en este sitio, por ende, la\n                iluminaci\xF3n debe ser un factor que de vida aqu\xED en las noches...\n                <br>\n                <a href="#" class="waves-effect waves-teal btn-flat btn-more-info">Ver completo <i class="ion-ios-paper-outline"></i></a>\n              </p>\n            </div>\n          </div>\n          <div class="col s12 l8 m6 hide-on-med-and-down">\n            <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">\n          </div>\n        </div>\n      </div>\n  ']);
 
 exports.default = sectTwo;
 
@@ -12401,14 +12437,14 @@ function sectTwo(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],394:[function(require,module,exports){
+},{"yo-yo":367}],395:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n      <div class="row section-three">\n        <div class="row box-image">\n          <div class="col s12 l8 m6">\n            <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">\n          </div>\n          <div class="col s12 l4 m6">\n            <div class="intro-container info-pub">\n              <h5>La tranquilidad para una tarde en familia</h5>\n              <p>\n                Entre las personas que llegan para estar, \n                las familiar son m\xE1s comunes en este sitio, por ende, la\n                iluminaci\xF3n debe ser un factor que de vida aqu\xED en las noches...\n                <br>\n                <a href="#" class="waves-effect waves-teal btn-flat btn-more-info">Ver completo <i class="ion-ios-paper-outline"></i></a>\n              </p>\n            </div>\n          </div>\n        </div>\n        <div class="row">\n          <div class="comments-container">\n            <span class="txt-for-fb">Tu opini\xF3n es muy valiosa para la comunidad</h5>\n            <div data-width="100%" class="fb-comments" data-href="https://www.facebook.com/JeissonValde/posts/1321623704629726?pnref=story" data-numposts="5"></div>\n          </div>\n        </div>\n      </div>\n  '], ['\n      <div class="row section-three">\n        <div class="row box-image">\n          <div class="col s12 l8 m6">\n            <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">\n          </div>\n          <div class="col s12 l4 m6">\n            <div class="intro-container info-pub">\n              <h5>La tranquilidad para una tarde en familia</h5>\n              <p>\n                Entre las personas que llegan para estar, \n                las familiar son m\xE1s comunes en este sitio, por ende, la\n                iluminaci\xF3n debe ser un factor que de vida aqu\xED en las noches...\n                <br>\n                <a href="#" class="waves-effect waves-teal btn-flat btn-more-info">Ver completo <i class="ion-ios-paper-outline"></i></a>\n              </p>\n            </div>\n          </div>\n        </div>\n        <div class="row">\n          <div class="comments-container">\n            <span class="txt-for-fb">Tu opini\xF3n es muy valiosa para la comunidad</h5>\n            <div data-width="100%" class="fb-comments" data-href="https://www.facebook.com/JeissonValde/posts/1321623704629726?pnref=story" data-numposts="5"></div>\n          </div>\n        </div>\n      </div>\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n      <div class="row section-three">\n        <div class="row box-image">\n          <div class="col s12 l8 m6">\n            <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">\n          </div>\n          <div class="col s12 l4 m6">\n            <div class="intro-container info-pub">\n              <h5>La tranquilidad para una tarde en familia</h5>\n              <p>\n                Entre las personas que llegan para estar, \n                las familiar son m\xE1s comunes en este sitio, por ende, la\n                iluminaci\xF3n debe ser un factor que de vida aqu\xED en las noches...\n                <br>\n                <a href="#" class="waves-effect waves-teal btn-flat btn-more-info">Ver completo <i class="ion-ios-paper-outline"></i></a>\n              </p>\n            </div>\n          </div>\n        </div>\n      </div>\n  '], ['\n      <div class="row section-three">\n        <div class="row box-image">\n          <div class="col s12 l8 m6">\n            <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">\n          </div>\n          <div class="col s12 l4 m6">\n            <div class="intro-container info-pub">\n              <h5>La tranquilidad para una tarde en familia</h5>\n              <p>\n                Entre las personas que llegan para estar, \n                las familiar son m\xE1s comunes en este sitio, por ende, la\n                iluminaci\xF3n debe ser un factor que de vida aqu\xED en las noches...\n                <br>\n                <a href="#" class="waves-effect waves-teal btn-flat btn-more-info">Ver completo <i class="ion-ios-paper-outline"></i></a>\n              </p>\n            </div>\n          </div>\n        </div>\n      </div>\n  ']);
 
 exports.default = sectThree;
 
@@ -12425,7 +12461,7 @@ function sectThree(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],395:[function(require,module,exports){
+},{"yo-yo":367}],396:[function(require,module,exports){
 'use strict';
 
 var _page = require('page');
@@ -12444,13 +12480,77 @@ require('babel-polyfill');
 require('./home');
 require('./auth');
 require('./folder');
+require('./paper');
 
 (0, _page2.default)();
 
 // PLUGINS FOR SOCIAL NETWORKS
 (0, _SDKFacebook2.default)();
 
-},{"./SDK-facebook":368,"./auth":369,"./folder":375,"./home":389,"babel-polyfill":26,"page":361}],396:[function(require,module,exports){
+},{"./SDK-facebook":369,"./auth":370,"./folder":376,"./home":390,"./paper":397,"babel-polyfill":26,"page":362}],397:[function(require,module,exports){
+'use strict';
+
+var _header = require('../header');
+
+var _header2 = _interopRequireDefault(_header);
+
+var _template = require('./template');
+
+var _template2 = _interopRequireDefault(_template);
+
+var _title = require('title');
+
+var _title2 = _interopRequireDefault(_title);
+
+var _page = require('page');
+
+var _page2 = _interopRequireDefault(_page);
+
+var _dataCenter = require('../utils/data-center');
+
+var _dataCenter2 = _interopRequireDefault(_dataCenter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _page2.default)('/paper/:id', _dataCenter2.default.load.auth, _dataCenter2.default.load.paper, _header2.default, function (ctx, next) {
+
+  $(document).ready(function () {
+
+    var $main = $('#main-container');
+    (0, _title2.default)(ctx.paper.title.substr(0, 15));
+    $main.empty().append((0, _template2.default)(ctx.paper));
+
+    // Materialize components
+  });
+});
+
+},{"../header":384,"../utils/data-center":399,"./template":398,"page":362,"title":366}],398:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _templateObject = _taggedTemplateLiteral(['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n      <div class="row">\n          <h4>', '</h4>\n      </div>\n      <div class="row">\n        <div class="fb-like" data-href="https://www.facebook.com/Parques-Gir-987208671421660/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>\n      </div>\n      <div class="row">\n        <div class="col s12"><img src="" width="400" alt="Imagen principal"></div>\n        <div class="col s12" id="paragraph"><p>', '</p></div>\n        <div class="col s12">Fotos adicionales</div>\n        <div class="col s12 box-comments"><div data-width="100%" class="fb-comments" data-href="', '" data-numposts="7"></div></div>\n      </div>\n    </div>\n  '], ['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n      <div class="row">\n          <h4>', '</h4>\n      </div>\n      <div class="row">\n        <div class="fb-like" data-href="https://www.facebook.com/Parques-Gir-987208671421660/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>\n      </div>\n      <div class="row">\n        <div class="col s12"><img src="" width="400" alt="Imagen principal"></div>\n        <div class="col s12" id="paragraph"><p>', '</p></div>\n        <div class="col s12">Fotos adicionales</div>\n        <div class="col s12 box-comments"><div data-width="100%" class="fb-comments" data-href="', '" data-numposts="7"></div></div>\n      </div>\n    </div>\n  ']);
+
+exports.default = template;
+
+var _yoYo = require('yo-yo');
+
+var _yoYo2 = _interopRequireDefault(_yoYo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function template(paper) {
+
+  var temp = (0, _yoYo2.default)(_templateObject, paper.exposedId, paper.title, paper.description, paper.face_link);
+
+  return temp;
+}
+
+},{"yo-yo":367}],399:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12467,7 +12567,7 @@ exports.default = {
   load: _load2.default
 };
 
-},{"./load":397}],397:[function(require,module,exports){
+},{"./load":400}],400:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12565,9 +12665,53 @@ function myfolder(ctx, next) {
   }, null, this, [[2, 10]]);
 }
 
+// Load paper (publications)
+function paper(ctx, next) {
+  var paper, id;
+  return regeneratorRuntime.async(function paper$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          paper = void 0;
+          id = ctx.params.id;
+          _context3.prev = 2;
+          _context3.next = 5;
+          return regeneratorRuntime.awrap(_axios2.default.get('/api/paper/' + id).then(function (res) {
+            return res.data;
+          }));
+
+        case 5:
+          paper = _context3.sent;
+
+
+          if (paper != undefined) {
+            ctx.paper = paper;
+          } else {
+            ctx.paper = null;
+          }
+
+          next();
+          _context3.next = 13;
+          break;
+
+        case 10:
+          _context3.prev = 10;
+          _context3.t0 = _context3['catch'](2);
+
+          console.log(_context3.t0);
+
+        case 13:
+        case 'end':
+          return _context3.stop();
+      }
+    }
+  }, null, this, [[2, 10]]);
+}
+
 exports.default = {
   auth: auth,
-  myfolder: myfolder
+  myfolder: myfolder,
+  paper: paper
 };
 
-},{"axios":1}]},{},[395]);
+},{"axios":1}]},{},[396]);

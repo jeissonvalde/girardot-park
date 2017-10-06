@@ -10,6 +10,13 @@ export default function template () {
 
   return yo`
     <div class="home-container">
+      <nav class="breadcrumb-box">
+        <div class="nav-wrapper">
+          <div class="col s12">
+            <a class="breadcrumb-ref blue-text text-lighten-3">Principal</a>
+          </div>
+        </div>
+      </nav>
        ${sectOne()}
       <div class="divider home-divider"></div>
        ${sectTwo()}

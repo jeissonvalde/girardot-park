@@ -1,8 +1,9 @@
 'use strict'
 
-// Para ver el depurador:
-// js.src = "//connect.facebook.net/en_US/sdk/debug.js"
-// Versión 2.10 - Sep 30 2017
+/*  Para ver el depurador:
+ *  js.src = "//connect.facebook.net/en_US/sdk/debug.js"
+ *  Versión 2.10 - Sep 30 2017
+ */
 
 export default function sdkFacebook () {
 
@@ -28,6 +29,5 @@ export default function sdkFacebook () {
       js.src = `//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=${idApp}`;
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-
   })
 }

@@ -5,24 +5,21 @@ export default function aparitionToCenter () {
   // This element should be a jquery object
   let $two = $('.section-two .box-image')
   let $three = $('.section-three .box-image')
+  $two.addClass('moveLeft')
+  $three.addClass('moveRight')
 
   var options = [
     {
       selector: '.section-two .box-image', offset: 180, callback: function() {
-        $two.css({
-          'transform': 'translateX(0%)',
-          'opacity': '1'
-        })
+        $two.removeClass('moveLeft')
       }
     },
     {
       selector: '.section-three .box-image', offset: 350, callback: function() {
-        $three.css({
-          'transform': 'translateX(0%)',
-          'opacity': '1'
-        })
+        $three.removeClass('moveRight')
       }
     },
   ]
+
   Materialize.scrollFire(options)
 }

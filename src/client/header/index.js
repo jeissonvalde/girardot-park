@@ -16,23 +16,13 @@ export default function header (ctx, next) {
     offset: 0
   })
 
-  $(".dropdown-button").dropdown({
-      inDuration: 300,
-      outDuration: 225,
-      constrainWidth: false,
-      hover: true,
-      gutter: 0,
-      belowOrigin: true,
-      alignment: 'right',
-      stopPropagation: false
-    })
 
-    $('#modals-container').empty().append(modal.login())
+  $('#modals-container').empty().append(modal.login())
 
-    $('.modal').modal()
+  $('.modal').modal()
 
-    $('.scrollspy').scrollSpy()
+  $('.scrollspy').scrollSpy()
 
-    animations.init()
+  animations.init()
   next()
 }

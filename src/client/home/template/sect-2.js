@@ -37,12 +37,6 @@ export default function sectTwo (opts) {
             <img class="materialboxed" src="http://materializecss.com/images/sample-1.jpg">
           </div>
         </div>
-        <div class="row">
-          <div class="comments-container">
-            <span class="txt-for-fb">Tu opinión es muy valiosa para la comunidad</h5>
-            <div data-width="100%" class="fb-comments" data-href="https://www.facebook.com/JeissonValde/posts/1321623704629726?pnref=story" data-numposts="5"></div>
-          </div>
-        </div>
       </div>
   `
 }

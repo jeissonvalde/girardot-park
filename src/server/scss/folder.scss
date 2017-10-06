@@ -2,6 +2,7 @@
 
 $intoBoxes: rgb(217, 217, 217);
 $blueDark: #161C2E;
+$redDark: #C02727;
 
 .folder-container {
   padding: 20px 15px;
@@ -29,5 +30,6 @@ $blueDark: #161C2E;
 
   i {
     font-size: 20px;
+    color: $redDark;
   }
 }

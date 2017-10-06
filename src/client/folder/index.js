@@ -2,6 +2,7 @@
 
 import page from 'page'
 import title from 'title'
+import empty from 'empty-element'
 import template from './template'
 import modal from './modals'
 import animation from './animations'
@@ -23,7 +24,7 @@ page('/user/folder',
     }
     let $main = $('#main-container')
     title('Portafolio')
-    $main.empty().append(template(data))
+    empty($main).append(template(data))
 
     // Materialize components
     $('ul.tabs').tabs()

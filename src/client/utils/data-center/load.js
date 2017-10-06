@@ -42,7 +42,28 @@ async function myfolder (ctx, next) {
   }
 }
 
+// Load paper (publications)
+async function paper (ctx, next) {
+  let paper
+  let id = ctx.params.id
+
+  try {
+    paper = await axios.get(`/api/paper/${id}`).then(res => res.data)
+
+    if (paper != undefined) {
+      ctx.paper = paper
+    } else {
+      ctx.paper = null
+    }
+
+    next()
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 export default {
   auth,
-  myfolder
+  myfolder,
+  paper
 }

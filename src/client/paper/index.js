@@ -1,21 +1,24 @@
 'use strict'
 
 import header from '../header'
+import template from './template'
+import title from 'title'
+import page from 'page'
+import data from '../utils/data-center'
 
 
-page('/paper/edit/:id',
+page('/paper/:id',
+      data.load.auth,
+      data.load.paper,
       header,
       (ctx, next) => {
 
   $(document).ready(function(){
 
     let $main = $('#main-container')
-    title('#####  Título del artículo ####')
-    $main.empty().append(template())
+    title(ctx.paper.title.substr(0, 15))
+    $main.empty().append(template(ctx.paper))
 
     // Materialize components
-    $('.materialboxed').materialbox()
-    $('.carousel').carousel()
-    animation.aparitionToCenter()
   })
 })

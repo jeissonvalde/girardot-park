@@ -2,7 +2,8 @@
  *  Styles, it is modularized
  */
 .home-container {
-  margin: 30px 0; }
+  margin: 30px 0;
+  padding: 20px 15px; }
   .home-container .btn-more-info {
     color: brown;
     text-transform: initial; }
@@ -25,7 +26,9 @@
 
 .info-pub p {
   font-size: 15px;
-  font-family: 'Reem Kufi'; }
+  font-family: 'Reem Kufi';
+  white-space: normal !important;
+  text-align: center !important; }
 
 .comments-container {
   background-color: #d9d9d9;
@@ -46,8 +49,7 @@
   background-color: black; }
 
 .box-image {
-  transition: all 1s cubic-bezier(0.55, 0.35, 0, 0.69);
-  opacity: 0; }
+  transition: all 1s cubic-bezier(0.55, 0.35, 0, 0.69); }
   .box-image img {
     min-width: 350px;
     width: 100%;
@@ -56,11 +58,13 @@
 .main-image {
   opacity: 1 !important; }
 
-.section-two .box-image {
-  transform: translateX(-110%); }
+.moveLeft {
+  transform: translateX(-110%);
+  opacity: 0; }
 
-.section-three .box-image {
-  transform: translateX(110%); }
+.moveRight {
+  transform: translateX(110%);
+  opacity: 0; }
 
 /*
  *  MODAL STYLES
@@ -94,7 +98,47 @@
 
 .editit i,
 .seeit i {
-  font-size: 20px; }
+  font-size: 20px;
+  color: #C02727; }
+
+.paper-content {
+  padding: 20px 15px; }
+  .paper-content p {
+    margin: 20px 10px;
+    font-size: 20px;
+    padding-bottom: 20px;
+    font-family: 'Reem Kufi'; }
+
+/*
+ *  Styles, it is modularized
+ */
+input:not([type]):focus:not([readonly]),
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #039be5;
+  box-shadow: 0 1px 0 0 #161C2E; }
+
+.tabs .tab a {
+  color: #C02727; }
+
+.tabs .tab a.active {
+  color: red; }
+
+.tabs .indicator {
+  background-color: #C02727; }
+
+.input-field label.active {
+  color: #039be5 !important; }
 
 body {
   background-color: #FFF5F5;
@@ -128,14 +172,56 @@ body {
 .margin-12-12 {
   margin: 12px 12px !important; }
 
+.profile-img:hover {
+  background-color: transparent; }
+
 .profile-img {
   height: 64px;
   padding: 6px 18px; }
   .profile-img img {
-    border-radius: 50%; }
+    border-radius: 50%;
+    transition: all 0.5s cubic-bezier(0.11, -0.26, 0.93, 1.43); }
+  .profile-img img:hover {
+    box-shadow: 1px 0px 40px -6px #039be5; }
 
 form {
   background-color: #fff;
   padding-top: 15px;
   padding: 0 30px;
   margin: 15px auto; }
+
+p {
+  white-space: pre-wrap;
+  text-align: justify; }
+
+.box-comments {
+  background-color: #d9d9d9;
+  border-radius: 3px; }
+
+.breadcrumb-box {
+  height: 24px !important;
+  line-height: 24px !important;
+  background-color: transparent;
+  border-radius: 3px; }
+  .breadcrumb-box .nav-wrapper {
+    padding: 0 8px;
+    border-radius: inherit; }
+    .breadcrumb-box .nav-wrapper .breadcrumb-ref {
+      font-size: 10px; }
+      .breadcrumb-box .nav-wrapper .breadcrumb-ref i {
+        display: inline;
+        font-size: 12px;
+        line-height: 0;
+        margin: 0 5px; }
+
+.dropdown-content.ready {
+  transition: all .5s ease;
+  transform: translateX(150px);
+  width: 129px;
+  position: absolute;
+  top: 65px;
+  right: 0px;
+  opacity: 1;
+  display: block; }
+  .dropdown-content.ready li a {
+    color: #161C2E; }

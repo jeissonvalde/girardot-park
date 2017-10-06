@@ -6,6 +6,7 @@ $blueDark: #161C2E;
 
 .home-container {
   margin: 30px 0;
+  padding: 20px 15px;
 
   .btn-more-info {
     color: brown;
@@ -37,6 +38,8 @@ $blueDark: #161C2E;
   p {
     font-size: 15px;
     font-family: 'Reem Kufi';
+    white-space: normal !important;
+    text-align: center !important;
   }
 }
 
@@ -64,7 +67,6 @@ $blueDark: #161C2E;
 
 .box-image {
   transition: all 1s cubic-bezier(0.55, 0.35, 0, 0.69);
-  opacity: 0;
 
   img {
     min-width: 350px;
@@ -77,19 +79,13 @@ $blueDark: #161C2E;
   opacity: 1 !important;
 }
 
-.section-two {
 
-  .box-image {
-
-    transform: translateX(-110%);
-  }
+.moveLeft {
+  transform: translateX(-110%);
+  opacity: 0;
 }
 
-.section-three {
-
-  .box-image {
-
-    transform: translateX(110%);
-    
-  }
+.moveRight {
+  transform: translateX(110%);
+  opacity: 0;
 }

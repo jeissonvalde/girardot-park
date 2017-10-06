@@ -2,6 +2,7 @@
 
 import page from 'page'
 import title from 'title'
+import empty from 'empty-element'
 import template from './template'
 import animation from './animations'
 import header from '../header'
@@ -17,7 +18,7 @@ page('/',
 
     let $main = $('#main-container')
     title('Parques Girardot')
-    $main.empty().append(template())
+    empty($main).append(template())
 
     // Materialize components
     $('.materialboxed').materialbox()

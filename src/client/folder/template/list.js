@@ -30,12 +30,12 @@ function makeList (arr) {
         var temp = yo`
           <li class="collection-item avatar">
             <img src="${el.user.profile_image}" alt="imagen de perfil" class="circle">
-            <span class="title">${el.title.substr(0, 38)}</span>
+            <span class="title">${el.title.substr(0, 23)}</span>
             <p>Autor: ${el.user.name}<br>
               <a href="${el.face_link}">Publicación en facebook</a>
             </p>
-            <a href="#!" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>
-            <a href="#!" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>
+            <a href="/paper/${el.exposedId}" target="_self" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>
+            <a href="/paper/edit/${el.exposedId}" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>
           </li>
         `;
 

@@ -80,7 +80,7 @@ function ensureAuth (req, res, next) {
     return next()
   }
 
-  res.status(401).send({ error: 'not authenticated' })
+  res.status(401).send({ error: 'not authenticated' }).redirect('/')
 }
 
 // Content Endpoints
@@ -90,6 +90,22 @@ app.get('/', (req, res) => {
 
 app.get('/user/folder', ensureAuth, (req, res) => {
   res.render('index', { title: 'Portafolio' })
+})
+
+app.get('/paper/:id', (req, res) => {
+  res.render('index', { title: 'Artículo' })
+})
+
+app.get('/api/paper/:id', (req, res) => {
+  let id = req.params.id
+
+  client.getPaperById(id, (err, paper) => {
+    if (err) {
+      res.status(500).send(err.message)
+    }
+
+    res.send(paper)
+  })
 })
 
 app.get('/api/folder/:id', ensureAuth, (req, res) => {
@@ -116,7 +132,7 @@ app.post('/user/folder/add-paper', ensureAuth, (req, res) => {
       if (err) {
         return res.status(500).send(err.message)
       }
-      
+
       res.send(paper)
     })
 })

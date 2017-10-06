@@ -15,6 +15,7 @@
     white;                     BG day Blanco.
     rgb(217, 217, 217);        Gris claro (usado en cajas de intros)
     #EF6C35;                   Mandarina o zanahoria
+    #F6C667;                   Amarillo quemado y claro
     #FFF5F5;                   beish muy claro 
     #C02727;                   Vino tinto rosa. (usado en botón)
     

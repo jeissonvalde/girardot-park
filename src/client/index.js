@@ -8,6 +8,7 @@ import sdkFacebook from './SDK-facebook'
 require('./home')
 require('./auth')
 require('./folder')
+require('./paper')
 
 page()
 

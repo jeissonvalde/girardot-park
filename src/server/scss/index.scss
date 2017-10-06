@@ -5,7 +5,13 @@
 @import "./home";
 @import "./modals";
 @import "./folder";
+@import "./paper";
+@import "./materialize";
 
+$grayBox: rgb(217, 217, 217);
+$blueDark: #161C2E;
+$redDark: #C02727;
+$blue: #039be5;
 
 body {
   background-color: #FFF5F5;
@@ -30,7 +36,7 @@ body {
 
 .nav-wrapper {
 
-  background-color: #161C2E;
+  background-color: $blueDark;
 }
 
 .btn-floating.btn-flat {
@@ -50,12 +56,21 @@ body {
   margin: 12px 12px !important;
 }
 
+.profile-img:hover {
+  background-color: transparent;
+}
+
 .profile-img {
   height: 64px;
   padding: 6px 18px;
 
   img {
     border-radius: 50%;
+    transition: all .5s cubic-bezier(0.11, -0.26, 0.93, 1.43);
+  }
+
+  img:hover {
+    box-shadow: 1px 0px 40px -6px $blue;
   }
 }
 
@@ -64,4 +79,55 @@ form {
   padding-top: 15px;
   padding: 0 30px;
   margin: 15px auto;
+}
+
+p {
+  white-space: pre-wrap;
+  text-align: justify;
+}
+
+.box-comments {
+  background-color: $grayBox;
+  border-radius: 3px;
+}
+
+.breadcrumb-box {
+  height: 24px !important;
+  line-height: 24px !important;
+  background-color: transparent;
+  border-radius: 3px;
+
+  .nav-wrapper {
+    padding: 0 8px;
+    border-radius: inherit;
+
+    .breadcrumb-ref {
+      font-size: 10px;
+
+      i {
+        display: inline;
+        font-size: 12px;
+        line-height: 0;
+        margin: 0 5px;
+      }
+    }
+  }
+}
+
+.dropdown-content.ready {
+  transition: all .5s ease;
+  transform: translateX(150px);
+  width: 129px;
+  position: absolute;
+  top: 65px;
+  right: 0px;
+  opacity: 1;
+  display: block;
+
+  li {
+
+    a {
+      color: $blueDark;
+    }
+  }
 }

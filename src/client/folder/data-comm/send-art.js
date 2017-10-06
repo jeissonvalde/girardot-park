@@ -11,9 +11,8 @@ export default function sendArt (data, user) {
       url: '/user/folder/add-paper',
       data: data
     })
-    .done(function (data) {
+    .done(function (res) {
       console.log(`%c Almacenado`, 'color: #3c86e6; font-size: 10px')
-      console.log(`%c ${data}`, 'color: green; font-size: 10px')
 
       let newId = 'li_' + Math.floor((Math.random() * 20) + 6)
       let $form = $('#addArtContent')
@@ -21,13 +20,13 @@ export default function sendArt (data, user) {
 
       let temp = yo`
         <li id="${newId}" class="collection-item avatar" style="background-color: #EF6C35; transition: all .8s ease;">
-          <img src="${user.profile_image}" alt="imagen de perfil" class="circle">
-          <span class="title">${data.title.substr(0, 38)}</span>
-          <p>Autor: ${user.name}<br>
-            <a href="${data.face_link}">Publicación en facebook</a>
+          <img src="${res.user.profile_image}" alt="imagen de perfil" class="circle">
+          <span class="title">${res.title.substr(0, 23)}</span>
+          <p>Autor: ${res.user.name}<br>
+            <a href="${res.face_link}">Publicación en facebook</a>
           </p>
-          <a href="#!" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>
-          <a href="#!" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>
+          <a href="/paper/${res.exposedId}" target="_self" class="secondary-content seeit"><span>Ver</span><i class="ion-ios-paper-outline"></i></a>
+          <a href="/paper/edit/${res.exposedId}" class="secondary-content editit"><span>Editar</span><i class="ion-edit"></i></a>
         </li>
       `
 
