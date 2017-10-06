@@ -8,18 +8,21 @@ export default function aparitionToCenter () {
   $two.addClass('moveLeft')
   $three.addClass('moveRight')
 
-  var options = [
-    {
-      selector: '.section-two .box-image', offset: 180, callback: function() {
-        $two.removeClass('moveLeft')
-      }
-    },
-    {
-      selector: '.section-three .box-image', offset: 350, callback: function() {
-        $three.removeClass('moveRight')
-      }
-    },
-  ]
+  $(document).on('scroll', function (ev) {
 
-  Materialize.scrollFire(options)
+    console.log($(document).scrollTop())
+
+    // Night and day transition
+    if ($(document).scrollTop() > 300) {
+      $two.removeClass('moveLeft')
+    } else {
+      $two.addClass('moveLeft')
+    }
+
+    if ($(document).scrollTop() > 620) {
+      $three.removeClass('moveRight')
+    } else {
+      $three.addClass('moveRight')
+    }
+  })
 }
