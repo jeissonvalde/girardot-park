@@ -3,7 +3,18 @@
 import yo from 'yo-yo'
 
 
-export default function template (paper) {
+export default function template (paper, user) {
+
+  let auth = ''
+  let an = ''
+
+  if (user == paper.userId) {
+    auth = yo`
+      <div class="col s12 m3 center">
+        <a href="/paper/edit/${paper.exposedId}" class="btn edit-btn">Editar artículo</a>
+      </div>`
+    an = 'm9'
+  }
 
   let temp = yo`
     <div class="paper-content">
@@ -19,7 +30,10 @@ export default function template (paper) {
           <h4>${paper.title}</h4>
       </div>
       <div class="row">
-        <div class="fb-like" data-href="https://www.facebook.com/Parques-Gir-987208671421660/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+        ${auth}
+        <div class="col s12 ${an}">
+          <div class="fb-like" data-href="https://www.facebook.com/Parques-Gir-987208671421660/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+        </div>
       </div>
       <div class="row">
         <div class="col s12"><img src="" width="400" alt="Imagen principal"></div>

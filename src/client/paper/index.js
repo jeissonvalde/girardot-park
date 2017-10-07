@@ -17,8 +17,7 @@ page('/paper/:id',
 
     let $main = $('#main-container')
     title(ctx.paper.title.substr(0, 15))
-    $main.empty().append(template(ctx.paper))
-
-    // Materialize components
+    delete ctx.paper.userId
+    $main.empty().append(template(ctx.paper, ctx.auth.exposedId))
   })
 })
