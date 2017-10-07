@@ -5,4 +5,4 @@ env.sh
 yarn.lock
 memory.sh
 rethinkdb_data
-public
+public/
