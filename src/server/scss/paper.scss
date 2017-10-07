@@ -2,6 +2,7 @@
 
 $intoBoxes: rgb(217, 217, 217);
 $blueDark: #161C2E;
+$redDark: #C02727;
 
 .paper-content {
   padding: 20px 15px;
@@ -12,4 +13,17 @@ $blueDark: #161C2E;
     padding-bottom: 20px;
     font-family: 'Reem Kufi';
   }
+}
+
+.edit-btn {
+  background-color: $redDark;
+  height: 25px;
+  line-height: 25px;
+  text-transform: initial;
+  font-weight: bolder;
+  margin-bottom: 12px;
+}
+
+.edit-btn:hover {
+  background-color: red;
 }

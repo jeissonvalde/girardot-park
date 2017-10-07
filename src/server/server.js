@@ -96,6 +96,28 @@ app.get('/paper/:id', (req, res) => {
   res.render('index', { title: 'Artículo' })
 })
 
+app.get('/paper/edit/:id', ensureAuth, (req, res) => {
+  res.render('index', { title: 'Artículo' })
+})
+
+app.put('/api/paper/edit/', (req, res) => {
+  let author = req.user.exposedId
+  let paper = req.body
+
+  if (author == paper.user) {
+    delete paper.user
+    client.updatePaper(paper, (err, msg) => {
+      if (err) {
+        res.status(500).send(err.message)
+      }
+
+      res.send(msg)
+    })
+  } else {
+    res.status(500).send({ message : 'No estás autorizado' })
+  }
+})
+
 app.get('/api/paper/:id', (req, res) => {
   let id = req.params.id
 
