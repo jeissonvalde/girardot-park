@@ -9,6 +9,7 @@ require('./home')
 require('./auth')
 require('./folder')
 require('./paper')
+require('./paper-edit')
 
 page()
 
