@@ -105,9 +105,25 @@
   padding: 20px 15px; }
   .paper-content p {
     margin: 20px 10px;
-    font-size: 20px;
+    font-size: 18px;
     padding-bottom: 20px;
     font-family: 'Reem Kufi'; }
+
+.edit-btn {
+  background-color: #C02727;
+  height: 25px;
+  line-height: 25px;
+  text-transform: initial;
+  font-weight: bolder;
+  margin-bottom: 12px; }
+
+.edit-btn:hover {
+  background-color: red; }
+
+.paper-content form p {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 14px; }
 
 /*
  *  Styles, it is modularized
@@ -180,9 +196,9 @@ body {
   padding: 6px 18px; }
   .profile-img img {
     border-radius: 50%;
-    transition: all 0.5s cubic-bezier(0.11, -0.26, 0.93, 1.43); }
+    transition: all 0.5s cubic-bezier(0, 0.1, 0, 1.82); }
   .profile-img img:hover {
-    box-shadow: 1px 0px 40px -6px #039be5; }
+    box-shadow: 0px 0px 0px 2px #039be5; }
 
 form {
   background-color: #fff;
