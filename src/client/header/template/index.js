@@ -36,7 +36,7 @@ export default function template (opts) {
           </ul>
         </div>
       </nav>
-      
+
     </div>
   `
 }
