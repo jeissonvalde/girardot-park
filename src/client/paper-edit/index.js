@@ -5,6 +5,7 @@ import template from './template'
 import title from 'title'
 import page from 'page'
 import data from '../utils/data-center'
+import animations from './animations'
 
 
 page('/paper/edit/:id',
@@ -19,6 +20,9 @@ page('/paper/edit/:id',
     title(ctx.paper.title.substr(0, 15))
     $main.empty().append(template(ctx.paper))
 
-    // Materialize components
+    // Animations and functions
+    $('.modal').modal()
+    $('select').material_select()
+    animations.saveChanges()
   })
 })

@@ -11866,7 +11866,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   });
 });
 
-},{"../header":383,"../utils/data-center":401,"./animations":372,"./modals":377,"./template":379,"page":361,"title":365}],376:[function(require,module,exports){
+},{"../header":383,"../utils/data-center":408,"./animations":372,"./modals":377,"./template":379,"page":361,"title":365}],376:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12308,7 +12308,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   });
 });
 
-},{"../header":383,"../utils/data-center":401,"./animations":388,"./template":391,"page":361,"title":365}],390:[function(require,module,exports){
+},{"../header":383,"../utils/data-center":408,"./animations":388,"./template":391,"page":361,"title":365}],390:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12471,7 +12471,129 @@ require('./paper-edit');
 // PLUGINS FOR SOCIAL NETWORKS
 (0, _SDKFacebook2.default)();
 
-},{"./SDK-facebook":368,"./auth":369,"./folder":375,"./home":389,"./paper":399,"./paper-edit":396,"babel-polyfill":26,"page":361}],396:[function(require,module,exports){
+},{"./SDK-facebook":368,"./auth":369,"./folder":375,"./home":389,"./paper":406,"./paper-edit":400,"babel-polyfill":26,"page":361}],396:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _savePaper = require('./save-paper');
+
+var _savePaper2 = _interopRequireDefault(_savePaper);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  saveChanges: _savePaper2.default
+};
+
+},{"./save-paper":397}],397:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = saveChanges;
+
+var _sendChgs = require('../data-comm/send-chgs');
+
+var _sendChgs2 = _interopRequireDefault(_sendChgs);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function saveChanges(exposedId) {
+  // Animations to save a paper changes
+
+  $('#editArtContent #inForm').on('click', '.save-btn', function (ev) {
+    ev.preventDefault();
+    var $form = $(this).closest('#inForm');
+
+    var title = $form.find('#title').val();
+    var ref = $form.find('#ref').val();
+    var video = $form.find('#video').val();
+    var description = $form.find('#description').val();
+    var user = $form.find('#user').val();
+
+    var data = {
+      title: title,
+      face_link: ref,
+      video: video,
+      description: description,
+      user: user,
+      exposedId: exposedId
+    };
+
+    (0, _sendChgs2.default)(data);
+  });
+}
+
+},{"../data-comm/send-chgs":399}],398:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = onsubmit;
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _yoYo = require('yo-yo');
+
+var _yoYo2 = _interopRequireDefault(_yoYo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function onsubmit(ev) {
+  ev.preventDefault();
+
+  // let data = new FormData(this)
+  // axios
+  //   .post('/upload-image', data)
+  //   .then(function (res) {
+  //     console.log(res.data)
+  //   })
+  //   .catch(function (err) {
+  //     console.log(err)
+  //   })
+
+  var $modal = $(this).closest('#modal_upimg');
+
+  var $btnAdd = $modal.find('#btnUpload');
+  var $btnClose = $modal.find('.modal-close');
+  var loading = 'Subiendo... <i class="fa ion-paper-airplane faa-passing animated"></i>';
+
+  $btnAdd.addClass('disabled');
+  $btnAdd.html(loading);
+
+  setInterval(function () {}, 2000);
+}
+
+},{"axios":1,"yo-yo":366}],399:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = sendChgs;
+function sendChgs(data) {
+
+  $.ajax({
+    method: 'PUT',
+    url: '/api/paper/edit/',
+    data: data
+  }).done(function (res) {
+    console.log('%c ' + res.message + '.', 'color: #3c86e6; font-size: 10px');
+    Materialize.toast(res.message, 3000);
+  }).fail(function (err) {
+    console.error(err);
+    Materialize.toast('Error en el servidor', 3000);
+  });
+}
+
+},{}],400:[function(require,module,exports){
 'use strict';
 
 var _header = require('../header');
@@ -12494,6 +12616,10 @@ var _dataCenter = require('../utils/data-center');
 
 var _dataCenter2 = _interopRequireDefault(_dataCenter);
 
+var _animations = require('./animations');
+
+var _animations2 = _interopRequireDefault(_animations);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _page2.default)('/paper/edit/:id', _dataCenter2.default.load.auth, _dataCenter2.default.load.paper, _header2.default, function (ctx, next) {
@@ -12504,18 +12630,96 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     (0, _title2.default)(ctx.paper.title.substr(0, 15));
     $main.empty().append((0, _template2.default)(ctx.paper));
 
-    // Materialize components
+    // Animations and functions
+    $('.modal').modal();
+    $('select').material_select();
+    _animations2.default.saveChanges();
   });
 });
 
-},{"../header":383,"../utils/data-center":401,"./template":398,"page":361,"title":365}],397:[function(require,module,exports){
+},{"../header":383,"../utils/data-center":408,"./animations":396,"./template":405,"page":361,"title":365}],401:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    <div class="row" id="editArtContent">\n      <form enctype="multipart/form-data" class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Edita cualquier campo del art\xEDculo. Tienes una <a href="#modal_help">ayuda</a> en caso de necesitar.\n            Al subir fotos tienes un l\xEDmite de max 3 im\xE1genes por art\xEDculo.\n            <a href="#">Sugierenos</a> tus ideas o necesidades para este editor\n\n          </p>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate" value="', '">\n            <label class="active" data-error="dato necesario" for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate" value="', '">\n            <label class="active" for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate" value="', '">\n            <input id="user" type="hidden" value="Jeisson Valderrama" class="validate">\n            <input id="msg" type="hidden" value="" class="validate">\n            <label class="active" data-error="dato necesario" for="ref">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate">', '</textarea>\n            <label class="active" data-error="dato necesario" for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  '], ['\n    <div class="row" id="editArtContent">\n      <form enctype="multipart/form-data" class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Edita cualquier campo del art\xEDculo. Tienes una <a href="#modal_help">ayuda</a> en caso de necesitar.\n            Al subir fotos tienes un l\xEDmite de max 3 im\xE1genes por art\xEDculo.\n            <a href="#">Sugierenos</a> tus ideas o necesidades para este editor\n\n          </p>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate" value="', '">\n            <label class="active" data-error="dato necesario" for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate" value="', '">\n            <label class="active" for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate" value="', '">\n            <input id="user" type="hidden" value="Jeisson Valderrama" class="validate">\n            <input id="msg" type="hidden" value="" class="validate">\n            <label class="active" data-error="dato necesario" for="ref">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate">', '</textarea>\n            <label class="active" data-error="dato necesario" for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  ']);
+var _uploadImg = require('./upload-img');
+
+var _uploadImg2 = _interopRequireDefault(_uploadImg);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  uploadImg: _uploadImg2.default
+};
+
+},{"./upload-img":402}],402:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _templateObject = _taggedTemplateLiteral(['\n    <div id="modal_upimg" name="modal_upimg" class="modal modal-fixed-footer">\n    <!-- Modal Structure -->\n      <div class="modal-content">\n\n        ', '\n\n      </div>\n      <div class="modal-footer">\n        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>\n      </div>\n    </div>\n  '], ['\n    <div id="modal_upimg" name="modal_upimg" class="modal modal-fixed-footer">\n    <!-- Modal Structure -->\n      <div class="modal-content">\n\n        ', '\n\n      </div>\n      <div class="modal-footer">\n        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>\n      </div>\n    </div>\n  ']);
+
+exports.default = uploadImg;
+
+var _yoYo = require('yo-yo');
+
+var _yoYo2 = _interopRequireDefault(_yoYo);
+
+var _formAddImg = require('../template/form-add-img');
+
+var _formAddImg2 = _interopRequireDefault(_formAddImg);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function uploadImg(id) {
+
+  return (0, _yoYo2.default)(_templateObject, (0, _formAddImg2.default)(id));
+}
+
+},{"../template/form-add-img":403,"yo-yo":366}],403:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _templateObject = _taggedTemplateLiteral(['\n      <form id="imgForm" enctype="multipart/form-data" class="col s12" onsubmit=', '>\n\n        <div class="row">\n          <div class="file-field input-field">\n            <div class="waves-effect waves-light btn edit-btn">\n              <span>Escoger imagen</span>\n              <input type="file" id="file" name="picture">\n            </div>\n            <div class="file-path-wrapper">\n              <input class="file-path validate" type="text">\n              <input value="', '" id="exposedId" name="exposedId" type="hidden">\n            </div>\n          </div>\n          <div class="input-field col s12">\n            <select>\n              <option value="1" disabled selected>Introducci\xF3n (principal)</option>\n              <option value="2">Conclusi\xF3n (pen\xFAltima)</option>\n              <option value="3">Conclusi\xF3n (\xFAltima)</option>\n            </select>\n            <label>Ubicaci\xF3n en el art\xEDculo</label>\n          </div>\n        </div>\n\n        <div class="row">\n          <button id="btnUpload" type="submit" class="waves-effect waves-teal btn-flat right upimg-btn blue white-text">Agregar</button>\n        </div>\n      </form>\n  '], ['\n      <form id="imgForm" enctype="multipart/form-data" class="col s12" onsubmit=', '>\n\n        <div class="row">\n          <div class="file-field input-field">\n            <div class="waves-effect waves-light btn edit-btn">\n              <span>Escoger imagen</span>\n              <input type="file" id="file" name="picture">\n            </div>\n            <div class="file-path-wrapper">\n              <input class="file-path validate" type="text">\n              <input value="', '" id="exposedId" name="exposedId" type="hidden">\n            </div>\n          </div>\n          <div class="input-field col s12">\n            <select>\n              <option value="1" disabled selected>Introducci\xF3n (principal)</option>\n              <option value="2">Conclusi\xF3n (pen\xFAltima)</option>\n              <option value="3">Conclusi\xF3n (\xFAltima)</option>\n            </select>\n            <label>Ubicaci\xF3n en el art\xEDculo</label>\n          </div>\n        </div>\n\n        <div class="row">\n          <button id="btnUpload" type="submit" class="waves-effect waves-teal btn-flat right upimg-btn blue white-text">Agregar</button>\n        </div>\n      </form>\n  ']);
+
+exports.default = formAddImg;
+
+var _yoYo = require('yo-yo');
+
+var _yoYo2 = _interopRequireDefault(_yoYo);
+
+var _addImg = require('../data-comm/add-img');
+
+var _addImg2 = _interopRequireDefault(_addImg);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function formAddImg(exId) {
+
+  var temp = (0, _yoYo2.default)(_templateObject, _addImg2.default, exId);
+
+  return temp;
+}
+
+},{"../data-comm/add-img":398,"yo-yo":366}],404:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _templateObject = _taggedTemplateLiteral(['\n    <div class="row" id="editArtContent">\n      <form id="inForm" enctype="multipart/form-data" class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Edita cualquier campo del art\xEDculo. Tienes una <a href="#modal_help">ayuda</a> en caso de necesitar.\n            Al subir fotos tienes un l\xEDmite de max 3 im\xE1genes por art\xEDculo.\n            <a href="#">Sugierenos</a> tus ideas o necesidades para este editor\n\n          </p>\n        </div>\n        <div class="row">\n          <div class="col s12">\n            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir imagen</a>\n          </div>\n          <div class="col s4 img-main">\n            <img src="../../images/1507412589534.png" alt="">\n          </div>\n          <div class="col s4 img-secon">\n            <img src="../../../images/1507412589534.png" alt="">\n          </div>\n          <div class="col s4 img-final">\n            <img src="../../../../images/1507412589534.png" alt="">\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate" value="', '">\n            <label class="active" data-error="dato necesario" for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate" value="', '">\n            <label class="active" for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate" value="', '">\n            <input id="user" type="hidden" value="', '">\n            <label class="active" data-error="dato necesario" for="ref">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate">', '</textarea>\n            <label class="active" data-error="dato necesario" for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  '], ['\n    <div class="row" id="editArtContent">\n      <form id="inForm" enctype="multipart/form-data" class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Edita cualquier campo del art\xEDculo. Tienes una <a href="#modal_help">ayuda</a> en caso de necesitar.\n            Al subir fotos tienes un l\xEDmite de max 3 im\xE1genes por art\xEDculo.\n            <a href="#">Sugierenos</a> tus ideas o necesidades para este editor\n\n          </p>\n        </div>\n        <div class="row">\n          <div class="col s12">\n            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir imagen</a>\n          </div>\n          <div class="col s4 img-main">\n            <img src="../../images/1507412589534.png" alt="">\n          </div>\n          <div class="col s4 img-secon">\n            <img src="../../../images/1507412589534.png" alt="">\n          </div>\n          <div class="col s4 img-final">\n            <img src="../../../../images/1507412589534.png" alt="">\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate" value="', '">\n            <label class="active" data-error="dato necesario" for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate" value="', '">\n            <label class="active" for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate" value="', '">\n            <input id="user" type="hidden" value="', '">\n            <label class="active" data-error="dato necesario" for="ref">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate">', '</textarea>\n            <label class="active" data-error="dato necesario" for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  ']);
 
 exports.default = formEdit;
 
@@ -12529,19 +12733,19 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 function formEdit(p) {
 
-  var temp = (0, _yoYo2.default)(_templateObject, p.title, p.video, p.face_link, p.description);
+  var temp = (0, _yoYo2.default)(_templateObject, p.title, p.video, p.face_link, p.userId, p.description);
 
   return temp;
 }
 
-},{"yo-yo":366}],398:[function(require,module,exports){
+},{"yo-yo":366}],405:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/user/folder" class="breadcrumb-ref">Publicaciones <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/edit/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Edici\xF3n de art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n\n\n      <div class="row">\n        ', '\n      </div>\n    </div>\n  '], ['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/user/folder" class="breadcrumb-ref">Publicaciones <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/edit/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Edici\xF3n de art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n\n\n      <div class="row">\n        ', '\n      </div>\n    </div>\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/user/folder" class="breadcrumb-ref">Tus publicaciones <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/edit/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Edici\xF3n de art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n\n\n      <div class="row">\n        ', '\n      </div>\n\n\n      ', '\n    </div>\n  '], ['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/user/folder" class="breadcrumb-ref">Tus publicaciones <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/edit/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Edici\xF3n de art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n\n\n      <div class="row">\n        ', '\n      </div>\n\n\n      ', '\n    </div>\n  ']);
 
 exports.default = template;
 
@@ -12553,18 +12757,22 @@ var _formEdit = require('./form-edit');
 
 var _formEdit2 = _interopRequireDefault(_formEdit);
 
+var _modals = require('../modals');
+
+var _modals2 = _interopRequireDefault(_modals);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 function template(paper) {
 
-  var temp = (0, _yoYo2.default)(_templateObject, paper.exposedId, (0, _formEdit2.default)(paper));
+  var temp = (0, _yoYo2.default)(_templateObject, paper.exposedId, (0, _formEdit2.default)(paper), _modals2.default.uploadImg(paper.exposedId));
 
   return temp;
 }
 
-},{"./form-edit":397,"yo-yo":366}],399:[function(require,module,exports){
+},{"../modals":401,"./form-edit":404,"yo-yo":366}],406:[function(require,module,exports){
 'use strict';
 
 var _header = require('../header');
@@ -12595,11 +12803,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
     var $main = $('#main-container');
     (0, _title2.default)(ctx.paper.title.substr(0, 15));
+    delete ctx.paper.userId;
     $main.empty().append((0, _template2.default)(ctx.paper, ctx.auth.exposedId));
   });
 });
 
-},{"../header":383,"../utils/data-center":401,"./template":400,"page":361,"title":365}],400:[function(require,module,exports){
+},{"../header":383,"../utils/data-center":408,"./template":407,"page":361,"title":365}],407:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12634,7 +12843,7 @@ function template(paper, user) {
   return temp;
 }
 
-},{"yo-yo":366}],401:[function(require,module,exports){
+},{"yo-yo":366}],408:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12651,7 +12860,7 @@ exports.default = {
   load: _load2.default
 };
 
-},{"./load":402}],402:[function(require,module,exports){
+},{"./load":409}],409:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

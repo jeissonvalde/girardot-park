@@ -132,3 +132,18 @@ p {
     }
   }
 }
+
+.dropdown-content.select-dropdown {
+
+  li {
+    span {
+      color: $blueDark;
+    }
+  }
+
+  li.disabled {
+    span {
+      color: gray;
+    }
+  }
+}

@@ -7,7 +7,7 @@ export default function formEdit (p) {
 
   let temp = yo`
     <div class="row" id="editArtContent">
-      <form enctype="multipart/form-data" class="col s12">
+      <form id="inForm" enctype="multipart/form-data" class="col s12">
         <div class="row">
           <div class="col s12">
             <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>
@@ -21,6 +21,20 @@ export default function formEdit (p) {
             <a href="#">Sugierenos</a> tus ideas o necesidades para este editor
 
           </p>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir imagen</a>
+          </div>
+          <div class="col s4 img-main">
+            <img src="../../images/1507412589534.png" alt="">
+          </div>
+          <div class="col s4 img-secon">
+            <img src="../../../images/1507412589534.png" alt="">
+          </div>
+          <div class="col s4 img-final">
+            <img src="../../../../images/1507412589534.png" alt="">
+          </div>
         </div>
         <div class="row">
           <div class="input-field col s6">

@@ -1,7 +1,7 @@
 'use strict'
 
 
-export default function sendChgs (data, user) {
+export default function sendChgs (data) {
 
   $
     .ajax({
@@ -10,9 +10,11 @@ export default function sendChgs (data, user) {
       data: data
     })
     .done(function (res) {
-      console.log(`%c Guardado.`, 'color: #3c86e6; font-size: 10px')
+      console.log(`%c ${res.message}.`, 'color: #3c86e6; font-size: 10px')
+      Materialize.toast(res.message, 3000)
     })
     .fail(function (err) {
       console.error(err)
+      Materialize.toast('Error en el servidor', 3000)
     })
 }

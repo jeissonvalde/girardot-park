@@ -2,6 +2,7 @@
 
 import yo from 'yo-yo'
 import formEdit from './form-edit'
+import modal from '../modals'
 
 
 export default function template (paper) {
@@ -22,6 +23,9 @@ export default function template (paper) {
       <div class="row">
         ${formEdit(paper)}
       </div>
+
+
+      ${modal.uploadImg(paper.exposedId)}
     </div>
   `
 

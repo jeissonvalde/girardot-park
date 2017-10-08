@@ -1,6 +1,6 @@
 'use strict'
 
-import saveChanges from './send-paper'
+import saveChanges from './save-paper'
 
 
 export default {

@@ -125,6 +125,13 @@
   font-family: sans-serif;
   font-size: 14px; }
 
+.img-final,
+.img-secon,
+.img-main {
+  height: 100px;
+  background-color: green;
+  border: 2px solid blue; }
+
 /*
  *  Styles, it is modularized
  */
@@ -241,3 +248,9 @@ p {
   display: block; }
   .dropdown-content.ready li a {
     color: #161C2E; }
+
+.dropdown-content.select-dropdown li span {
+  color: #161C2E; }
+
+.dropdown-content.select-dropdown li.disabled span {
+  color: gray; }

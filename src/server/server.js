@@ -21,7 +21,7 @@ const env = process.env.NODE_ENV || 'production'
 // Almacenamiento de imagenes
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads')
+    cb(null, './images')
   },
   filename: function (req, file, cb) {
     cb(null, + Date.now() + '.' + ext(file.originalname))
@@ -80,7 +80,7 @@ function ensureAuth (req, res, next) {
     return next()
   }
 
-  res.status(401).send({ error: 'not authenticated' }).redirect('/')
+  res.redirect('/')
 }
 
 // Content Endpoints
@@ -100,13 +100,14 @@ app.get('/paper/edit/:id', ensureAuth, (req, res) => {
   res.render('index', { title: 'Artículo' })
 })
 
-app.put('/api/paper/edit/', (req, res) => {
-  let author = req.user.exposedId
+app.put('/api/paper/edit/', ensureAuth, (req, res) => {
+  let token = req.user.token
+  let session = req.user.exposedId
   let paper = req.body
 
-  if (author == paper.user) {
+  if (session == paper.user) {
     delete paper.user
-    client.updatePaper(paper, (err, msg) => {
+    client.updatePaper(paper, token, (err, msg) => {
       if (err) {
         res.status(500).send(err.message)
       }
@@ -165,25 +166,18 @@ app.post('/upload-image', ensureAuth, (req, res) => {
       return res.status(500).send(`Error uploading file: ${err.message}`)
     }
 
-    let data = req.body
+    let data = new Object()
 
-    console.log(data)
-
-    let token = req.user.token
     data.imgSrc = req.file.path
-    data.userId = req.user.exposedId
-    data.user = {
-      profile_image: req.user.profile_image,
-      name: req.user.name
-    }
+    data.id = req.body.exposedId
 
-    // client.saveAnPaper(data, token, (err, paper) => {
-    //   if (err) {
-    //     return res.status(500).send(err.message)
-    //   }
-      
-    //   res.send('Article uploaded')
-    // })
+    client.updatePaper(paper, token, (err, msg) => {
+      if (err) {
+        res.status(500).send(err.message)
+      }
+
+      res.send(msg)
+    })
   })
 })
 
