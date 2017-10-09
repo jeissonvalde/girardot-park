@@ -10,6 +10,8 @@ import girpark from 'parquesgir-client'
 import auth from './auth'
 import multer from 'multer'
 import ext from 'file-extension'
+import fs from 'fs'
+import path from 'path'
 
 // Create Instances
 const app = express()
@@ -21,7 +23,7 @@ const env = process.env.NODE_ENV || 'production'
 // Almacenamiento de imagenes
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './images')
+    cb(null, './public/images/posts')
   },
   filename: function (req, file, cb) {
     cb(null, + Date.now() + '.' + ext(file.originalname))
@@ -39,7 +41,8 @@ app.use(expressSession({
   resave: false,
   saveUninitialized: false
 }))
-app.use(express.static('public'))
+// app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, '../../public')))
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -50,6 +53,7 @@ app.set('view engine', 'pug')
 passport.use(auth.facebookStrategy)
 passport.deserializeUser(auth.deserializeUser)
 passport.serializeUser(auth.serializeUser)
+
 
 // Messages for auth process
 let badAccess = 'A ocurrido un error al ingresar con '
@@ -166,16 +170,27 @@ app.post('/upload-image', ensureAuth, (req, res) => {
       return res.status(500).send(`Error uploading file: ${err.message}`)
     }
 
-    let data = new Object()
-
-    data.imgSrc = req.file.path
-    data.id = req.body.exposedId
+    const lastImg = req.body.lastImg.substr(41)
+    let token = req.user.token
+    let paper = {
+      imgSrc: req.file.path,
+      position: req.body.position,
+      exposedId: req.body.exposedId
+    }
+    paper.imgSrc = paper.imgSrc.substr(6)
 
     client.updatePaper(paper, token, (err, msg) => {
       if (err) {
         res.status(500).send(err.message)
       }
 
+      if (lastImg.substr(0, 5) != 'html-') {
+        fs.unlink(`./public/images/posts/${lastImg}`, function (err) {
+          if (err) console.log(err)
+
+          console.log('imagen eliminada correctamente')
+        })
+      }
       res.send(msg)
     })
   })

@@ -125,12 +125,26 @@
   font-family: sans-serif;
   font-size: 14px; }
 
+.quit {
+  transform: translateX(-1000px);
+  opacity: 0; }
+
 .img-final,
 .img-secon,
 .img-main {
-  height: 100px;
-  background-color: green;
-  border: 2px solid blue; }
+  transition: all .8s ease-in;
+  opacity: 1; }
+  .img-final img,
+  .img-secon img,
+  .img-main img {
+    height: 100px;
+    margin: 0 auto; }
+  .img-final span,
+  .img-secon span,
+  .img-main span {
+    position: relative;
+    left: 22px;
+    font-size: 11px; }
 
 /*
  *  Styles, it is modularized

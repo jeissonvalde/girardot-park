@@ -23,6 +23,7 @@ page('/paper/edit/:id',
     // Animations and functions
     $('.modal').modal()
     $('select').material_select()
+    $('.materialboxed').materialbox()
     animations.saveChanges()
   })
 })

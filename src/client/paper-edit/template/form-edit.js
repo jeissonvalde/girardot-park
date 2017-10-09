@@ -5,6 +5,16 @@ import yo from 'yo-yo'
 
 export default function formEdit (p) {
 
+  let imgs = p.img
+  let images = [0,1,2]
+  for (var i = 0; i < imgs.length; i++) {
+    var el = imgs[i];
+
+    if (el == 0 || el == 1 || el == 2) {
+      imgs[i] = '/images/posts/html-css.png'
+    }
+  }
+
   let temp = yo`
     <div class="row" id="editArtContent">
       <form id="inForm" enctype="multipart/form-data" class="col s12">
@@ -24,16 +34,19 @@ export default function formEdit (p) {
         </div>
         <div class="row">
           <div class="col s12">
-            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir imagen</a>
+            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir / reemplazar imagen</a>
           </div>
           <div class="col s4 img-main">
-            <img src="../../images/1507412589534.png" alt="">
+            <img class="materialboxed" data-caption="Imagen principal, la primera en verse del artículo" src="${imgs[0]}" alt="">
+            <span>imagen de introducción</span>
           </div>
           <div class="col s4 img-secon">
-            <img src="../../../images/1507412589534.png" alt="">
+            <img class="materialboxed" data-caption="Penúltima imagen, en la parte inferior del artículo" src="${imgs[1]}" alt="">
+            <span>imagen de conclusión</span>
           </div>
           <div class="col s4 img-final">
-            <img src="../../../../images/1507412589534.png" alt="">
+            <img class="materialboxed" data-caption="Última imagen, en la parte inferior del artículo" src="${imgs[2]}" alt="">
+            <span>imagen de conclusión (final)</span>
           </div>
         </div>
         <div class="row">

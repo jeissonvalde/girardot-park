@@ -8,12 +8,6 @@ const config = {
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
       callbackURL: 'http://api.parquesgir.com/auth/facebook/callback'
     }
-
-    // twitter: {
-    //   consumerKey: process.env.TWITTER_CONSUMER_KEY,
-    //   consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-    //   callbackURL: 'http://api.parquesgir.com/auth/twitter/callback'
-    // }
   },
 
   secret: process.env.PARQUESGIR_SECRET
@@ -22,7 +16,6 @@ const config = {
 if (process.env.NODE_ENV == 'test') {
 
   config.auth.facebook.callbackURL = 'http://parquesgir.test:3000/auth/facebook/callback'
-  // config.auth.twitter.callbackURL = 'http://parquesgir.test:3000/auth/twitter/callback'
 }
 
 module.exports = config

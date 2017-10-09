@@ -12549,26 +12549,58 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function onsubmit(ev) {
   ev.preventDefault();
 
-  // let data = new FormData(this)
-  // axios
-  //   .post('/upload-image', data)
-  //   .then(function (res) {
-  //     console.log(res.data)
-  //   })
-  //   .catch(function (err) {
-  //     console.log(err)
-  //   })
-
-  var $modal = $(this).closest('#modal_upimg');
-
+  var $form = $(this);
+  var $modal = $form.closest('#modal_upimg');
   var $btnAdd = $modal.find('#btnUpload');
-  var $btnClose = $modal.find('.modal-close');
   var loading = 'Subiendo... <i class="fa ion-paper-airplane faa-passing animated"></i>';
+  var $formEdit = $('#inForm'); // Formulario de edición de información
+  var place = $form.find('#position').val(); // Lugar a reemplazar
+  var lastImg = $formEdit.find('.row .col.s4 img')[place].src; // obtener imagen anterior para eliminar
+  $form.find('#lastImg').val(lastImg);
 
-  $btnAdd.addClass('disabled');
-  $btnAdd.html(loading);
+  var data = new FormData(this);
+  $btnAdd.addClass('disabled').html(loading);
 
-  setInterval(function () {}, 2000);
+  _axios2.default.post('/upload-image', data).then(function (res) {
+    var img = res.data.img;
+    img.position = place;
+    console.log(res.data.message);
+    console.log(img);
+    $modal.modal('close');
+    $btnAdd.removeClass('disabled').html('Agregar');
+
+    if (img.position == 0) {
+      var $img = $formEdit.find('.img-main img');
+      $img.addClass('quit');
+
+      setTimeout(function () {
+        $img.attr('src', img.img[0]);
+        $img.removeClass('quit');
+      }, 1000);
+    }
+
+    if (img.position == 1) {
+      var _$img = $formEdit.find('.img-secon img');
+      _$img.addClass('quit');
+
+      setTimeout(function () {
+        _$img.attr('src', img.img[1]);
+        _$img.removeClass('quit');
+      }, 1000);
+    }
+
+    if (img.position == 2) {
+      var _$img2 = $formEdit.find('.img-final img');
+      _$img2.addClass('quit');
+
+      setTimeout(function () {
+        _$img2.attr('src', img.img[2]);
+        _$img2.removeClass('quit');
+      }, 1000);
+    }
+  }).catch(function (err) {
+    console.log(err);
+  });
 }
 
 },{"axios":1,"yo-yo":366}],399:[function(require,module,exports){
@@ -12633,6 +12665,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     // Animations and functions
     $('.modal').modal();
     $('select').material_select();
+    $('.materialboxed').materialbox();
     _animations2.default.saveChanges();
   });
 });
@@ -12689,7 +12722,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n      <form id="imgForm" enctype="multipart/form-data" class="col s12" onsubmit=', '>\n\n        <div class="row">\n          <div class="file-field input-field">\n            <div class="waves-effect waves-light btn edit-btn">\n              <span>Escoger imagen</span>\n              <input type="file" id="file" name="picture">\n            </div>\n            <div class="file-path-wrapper">\n              <input class="file-path validate" type="text">\n              <input value="', '" id="exposedId" name="exposedId" type="hidden">\n            </div>\n          </div>\n          <div class="input-field col s12">\n            <select>\n              <option value="1" disabled selected>Introducci\xF3n (principal)</option>\n              <option value="2">Conclusi\xF3n (pen\xFAltima)</option>\n              <option value="3">Conclusi\xF3n (\xFAltima)</option>\n            </select>\n            <label>Ubicaci\xF3n en el art\xEDculo</label>\n          </div>\n        </div>\n\n        <div class="row">\n          <button id="btnUpload" type="submit" class="waves-effect waves-teal btn-flat right upimg-btn blue white-text">Agregar</button>\n        </div>\n      </form>\n  '], ['\n      <form id="imgForm" enctype="multipart/form-data" class="col s12" onsubmit=', '>\n\n        <div class="row">\n          <div class="file-field input-field">\n            <div class="waves-effect waves-light btn edit-btn">\n              <span>Escoger imagen</span>\n              <input type="file" id="file" name="picture">\n            </div>\n            <div class="file-path-wrapper">\n              <input class="file-path validate" type="text">\n              <input value="', '" id="exposedId" name="exposedId" type="hidden">\n            </div>\n          </div>\n          <div class="input-field col s12">\n            <select>\n              <option value="1" disabled selected>Introducci\xF3n (principal)</option>\n              <option value="2">Conclusi\xF3n (pen\xFAltima)</option>\n              <option value="3">Conclusi\xF3n (\xFAltima)</option>\n            </select>\n            <label>Ubicaci\xF3n en el art\xEDculo</label>\n          </div>\n        </div>\n\n        <div class="row">\n          <button id="btnUpload" type="submit" class="waves-effect waves-teal btn-flat right upimg-btn blue white-text">Agregar</button>\n        </div>\n      </form>\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n      <form id="imgForm" enctype="multipart/form-data" class="col s12" onsubmit=', '>\n\n        <div class="row">\n          <div class="file-field input-field">\n            <div class="waves-effect waves-light btn edit-btn">\n              <span>Escoger imagen</span>\n              <input type="file" id="file" name="picture">\n            </div>\n            <div class="file-path-wrapper">\n              <input class="file-path validate" type="text">\n              <input value="', '" id="exposedId" name="exposedId" type="hidden">\n              <input value="" id="lastImg" name="lastImg" type="hidden">\n            </div>\n          </div>\n          <div class="input-field col s12">\n            <select id="position" name="position">\n              <option value="0">Introducci\xF3n (principal)</option>\n              <option value="1">Conclusi\xF3n (pen\xFAltima)</option>\n              <option value="2">Conclusi\xF3n (\xFAltima)</option>\n            </select>\n            <label>Ubicaci\xF3n en el art\xEDculo</label>\n          </div>\n        </div>\n\n        <div class="row">\n          <button id="btnUpload" type="submit" class="waves-effect waves-teal btn-flat right upimg-btn blue white-text">Agregar</button>\n        </div>\n      </form>\n  '], ['\n      <form id="imgForm" enctype="multipart/form-data" class="col s12" onsubmit=', '>\n\n        <div class="row">\n          <div class="file-field input-field">\n            <div class="waves-effect waves-light btn edit-btn">\n              <span>Escoger imagen</span>\n              <input type="file" id="file" name="picture">\n            </div>\n            <div class="file-path-wrapper">\n              <input class="file-path validate" type="text">\n              <input value="', '" id="exposedId" name="exposedId" type="hidden">\n              <input value="" id="lastImg" name="lastImg" type="hidden">\n            </div>\n          </div>\n          <div class="input-field col s12">\n            <select id="position" name="position">\n              <option value="0">Introducci\xF3n (principal)</option>\n              <option value="1">Conclusi\xF3n (pen\xFAltima)</option>\n              <option value="2">Conclusi\xF3n (\xFAltima)</option>\n            </select>\n            <label>Ubicaci\xF3n en el art\xEDculo</label>\n          </div>\n        </div>\n\n        <div class="row">\n          <button id="btnUpload" type="submit" class="waves-effect waves-teal btn-flat right upimg-btn blue white-text">Agregar</button>\n        </div>\n      </form>\n  ']);
 
 exports.default = formAddImg;
 
@@ -12719,7 +12752,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    <div class="row" id="editArtContent">\n      <form id="inForm" enctype="multipart/form-data" class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Edita cualquier campo del art\xEDculo. Tienes una <a href="#modal_help">ayuda</a> en caso de necesitar.\n            Al subir fotos tienes un l\xEDmite de max 3 im\xE1genes por art\xEDculo.\n            <a href="#">Sugierenos</a> tus ideas o necesidades para este editor\n\n          </p>\n        </div>\n        <div class="row">\n          <div class="col s12">\n            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir imagen</a>\n          </div>\n          <div class="col s4 img-main">\n            <img src="../../images/1507412589534.png" alt="">\n          </div>\n          <div class="col s4 img-secon">\n            <img src="../../../images/1507412589534.png" alt="">\n          </div>\n          <div class="col s4 img-final">\n            <img src="../../../../images/1507412589534.png" alt="">\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate" value="', '">\n            <label class="active" data-error="dato necesario" for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate" value="', '">\n            <label class="active" for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate" value="', '">\n            <input id="user" type="hidden" value="', '">\n            <label class="active" data-error="dato necesario" for="ref">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate">', '</textarea>\n            <label class="active" data-error="dato necesario" for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  '], ['\n    <div class="row" id="editArtContent">\n      <form id="inForm" enctype="multipart/form-data" class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Edita cualquier campo del art\xEDculo. Tienes una <a href="#modal_help">ayuda</a> en caso de necesitar.\n            Al subir fotos tienes un l\xEDmite de max 3 im\xE1genes por art\xEDculo.\n            <a href="#">Sugierenos</a> tus ideas o necesidades para este editor\n\n          </p>\n        </div>\n        <div class="row">\n          <div class="col s12">\n            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir imagen</a>\n          </div>\n          <div class="col s4 img-main">\n            <img src="../../images/1507412589534.png" alt="">\n          </div>\n          <div class="col s4 img-secon">\n            <img src="../../../images/1507412589534.png" alt="">\n          </div>\n          <div class="col s4 img-final">\n            <img src="../../../../images/1507412589534.png" alt="">\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate" value="', '">\n            <label class="active" data-error="dato necesario" for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate" value="', '">\n            <label class="active" for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate" value="', '">\n            <input id="user" type="hidden" value="', '">\n            <label class="active" data-error="dato necesario" for="ref">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate">', '</textarea>\n            <label class="active" data-error="dato necesario" for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n    <div class="row" id="editArtContent">\n      <form id="inForm" enctype="multipart/form-data" class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Edita cualquier campo del art\xEDculo. Tienes una <a href="#modal_help">ayuda</a> en caso de necesitar.\n            Al subir fotos tienes un l\xEDmite de max 3 im\xE1genes por art\xEDculo.\n            <a href="#">Sugierenos</a> tus ideas o necesidades para este editor\n\n          </p>\n        </div>\n        <div class="row">\n          <div class="col s12">\n            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir / reemplazar imagen</a>\n          </div>\n          <div class="col s4 img-main">\n            <img class="materialboxed" data-caption="Imagen principal, la primera en verse del art\xEDculo" src="', '" alt="">\n            <span>imagen de introducci\xF3n</span>\n          </div>\n          <div class="col s4 img-secon">\n            <img class="materialboxed" data-caption="Pen\xFAltima imagen, en la parte inferior del art\xEDculo" src="', '" alt="">\n            <span>imagen de conclusi\xF3n</span>\n          </div>\n          <div class="col s4 img-final">\n            <img class="materialboxed" data-caption="\xDAltima imagen, en la parte inferior del art\xEDculo" src="', '" alt="">\n            <span>imagen de conclusi\xF3n (final)</span>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate" value="', '">\n            <label class="active" data-error="dato necesario" for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate" value="', '">\n            <label class="active" for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate" value="', '">\n            <input id="user" type="hidden" value="', '">\n            <label class="active" data-error="dato necesario" for="ref">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate">', '</textarea>\n            <label class="active" data-error="dato necesario" for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  '], ['\n    <div class="row" id="editArtContent">\n      <form id="inForm" enctype="multipart/form-data" class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Edita cualquier campo del art\xEDculo. Tienes una <a href="#modal_help">ayuda</a> en caso de necesitar.\n            Al subir fotos tienes un l\xEDmite de max 3 im\xE1genes por art\xEDculo.\n            <a href="#">Sugierenos</a> tus ideas o necesidades para este editor\n\n          </p>\n        </div>\n        <div class="row">\n          <div class="col s12">\n            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir / reemplazar imagen</a>\n          </div>\n          <div class="col s4 img-main">\n            <img class="materialboxed" data-caption="Imagen principal, la primera en verse del art\xEDculo" src="', '" alt="">\n            <span>imagen de introducci\xF3n</span>\n          </div>\n          <div class="col s4 img-secon">\n            <img class="materialboxed" data-caption="Pen\xFAltima imagen, en la parte inferior del art\xEDculo" src="', '" alt="">\n            <span>imagen de conclusi\xF3n</span>\n          </div>\n          <div class="col s4 img-final">\n            <img class="materialboxed" data-caption="\xDAltima imagen, en la parte inferior del art\xEDculo" src="', '" alt="">\n            <span>imagen de conclusi\xF3n (final)</span>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate" value="', '">\n            <label class="active" data-error="dato necesario" for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate" value="', '">\n            <label class="active" for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate" value="', '">\n            <input id="user" type="hidden" value="', '">\n            <label class="active" data-error="dato necesario" for="ref">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate">', '</textarea>\n            <label class="active" data-error="dato necesario" for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  ']);
 
 exports.default = formEdit;
 
@@ -12733,7 +12766,17 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 function formEdit(p) {
 
-  var temp = (0, _yoYo2.default)(_templateObject, p.title, p.video, p.face_link, p.userId, p.description);
+  var imgs = p.img;
+  var images = [0, 1, 2];
+  for (var i = 0; i < imgs.length; i++) {
+    var el = imgs[i];
+
+    if (el == 0 || el == 1 || el == 2) {
+      imgs[i] = '/images/posts/html-css.png';
+    }
+  }
+
+  var temp = (0, _yoYo2.default)(_templateObject, imgs[0], imgs[1], imgs[2], p.title, p.video, p.face_link, p.userId, p.description);
 
   return temp;
 }

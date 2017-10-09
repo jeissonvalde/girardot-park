@@ -18,13 +18,14 @@ export default function formAddImg (exId) {
             <div class="file-path-wrapper">
               <input class="file-path validate" type="text">
               <input value="${exId}" id="exposedId" name="exposedId" type="hidden">
+              <input value="" id="lastImg" name="lastImg" type="hidden">
             </div>
           </div>
           <div class="input-field col s12">
-            <select>
-              <option value="1" disabled selected>Introducción (principal)</option>
-              <option value="2">Conclusión (penúltima)</option>
-              <option value="3">Conclusión (última)</option>
+            <select id="position" name="position">
+              <option value="0">Introducción (principal)</option>
+              <option value="1">Conclusión (penúltima)</option>
+              <option value="2">Conclusión (última)</option>
             </select>
             <label>Ubicación en el artículo</label>
           </div>
