@@ -7,6 +7,7 @@ export default function template (paper, user) {
 
   let auth = ''
   let an = ''
+  let main, prefinal, final
 
   if (user == paper.userId) {
     auth = yo`
@@ -15,6 +16,23 @@ export default function template (paper, user) {
       </div>`
     an = 'm9'
   }
+
+  for (var i = 0; i < paper.img.length; i++) {
+    var el = paper.img[i]
+
+    if (i == 0 && el != 0) {
+      main = yo`<div class="col s12 center"><img src="${el}" width="500" alt="Imagen principal"></div>`
+    }
+
+    if (i == 1 && el != 1) {
+      prefinal = yo`<div class="col s12 center"><img src="${el}" width="500" alt="Concluision"></div>`
+    }
+
+    if (i == 2 && el != 2) {
+      final = yo`<div class="col s12 center"><img src="${el}" width="500" alt="Concluision"></div>`
+    }
+  }
+
 
   let temp = yo`
     <div class="paper-content">
@@ -26,7 +44,7 @@ export default function template (paper, user) {
           </div>
         </div>
       </nav>
-      <div class="row">
+      <div class="row row-title">
           <h4>${paper.title}</h4>
       </div>
       <div class="row">
@@ -36,9 +54,10 @@ export default function template (paper, user) {
         </div>
       </div>
       <div class="row">
-        <div class="col s12"><img src="" width="400" alt="Imagen principal"></div>
+        ${main}
         <div class="col s12" id="paragraph"><p>${paper.description}</p></div>
-        <div class="col s12">Fotos adicionales</div>
+        ${prefinal}
+        ${final}
         <div class="col s12 box-comments"><div data-width="100%" class="fb-comments" data-href="${paper.face_link}" data-numposts="7"></div></div>
       </div>
     </div>

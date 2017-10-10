@@ -24,6 +24,6 @@ page('/paper/edit/:id',
     $('.modal').modal()
     $('select').material_select()
     $('.materialboxed').materialbox()
-    animations.saveChanges()
+    animations.saveChanges(ctx.paper.exposedId)
   })
 })

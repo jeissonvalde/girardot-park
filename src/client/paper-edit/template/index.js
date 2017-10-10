@@ -26,6 +26,7 @@ export default function template (paper) {
 
 
       ${modal.uploadImg(paper.exposedId)}
+      ${modal.help()}
     </div>
   `
 

@@ -20,6 +20,7 @@ export default function formEdit (p) {
       <form id="inForm" enctype="multipart/form-data" class="col s12">
         <div class="row">
           <div class="col s12">
+            <a href="/paper/${p.exposedId}" target="_self" class="waves-effect waves-teal btn-flat left green-text">ver artículo</a>
             <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>
             <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>
           </div>

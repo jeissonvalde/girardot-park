@@ -11866,7 +11866,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   });
 });
 
-},{"../header":383,"../utils/data-center":408,"./animations":372,"./modals":377,"./template":379,"page":361,"title":365}],376:[function(require,module,exports){
+},{"../header":385,"../utils/data-center":411,"./animations":372,"./modals":377,"./template":379,"page":361,"title":365}],376:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12017,25 +12017,8 @@ function makeList(arr) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _init = require('./init');
-
-var _init2 = _interopRequireDefault(_init);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  init: _init2.default
-};
-
-},{"./init":382}],382:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = init;
-function init() {
+exports.default = anim;
+function anim() {
 
   // Variables
 
@@ -12060,9 +12043,13 @@ function init() {
 
     // brand-logo change icon
     if ($(document).scrollTop() < 100) {
-      $('.brand-logo.margin-12-12 i.hello-world').removeClass('ion-ios-home').addClass('ion-code-working faa-tada animated');
+      $('.brand-logo i.hello-world').removeClass('ion-ios-home').addClass('ion-code-working faa-tada animated');
+      $('body').find('.btn-up').addClass('moveRight');
+      $('.brand-logo').attr({ id: '#btn-info-dev', href: '#info-dev' });
     } else {
-      $('.brand-logo.margin-12-12 i.hello-world').removeClass('ion-code-working faa-tada animated').addClass('ion-arrow-up-a');
+      $('.brand-logo i.hello-world').removeClass('ion-code-working faa-tada animated').addClass('ion-ios-home');
+      $('body').find('.btn-up').removeClass('moveRight');
+      $('.brand-logo').attr({ id: '', href: '/' });
     }
   });
 
@@ -12092,7 +12079,128 @@ function init() {
   });
 }
 
-},{}],383:[function(require,module,exports){
+},{}],382:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _init = require('./init');
+
+var _init2 = _interopRequireDefault(_init);
+
+var _anim = require('./anim');
+
+var _anim2 = _interopRequireDefault(_anim);
+
+var _infoDev = require('./info-dev');
+
+var _infoDev2 = _interopRequireDefault(_infoDev);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// use in ./anim.js
+
+
+exports.default = {
+  init: _init2.default,
+  anim: _anim2.default,
+  boxInfo: _infoDev2.default
+};
+
+},{"./anim":381,"./info-dev":383,"./init":384}],383:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = boxInfo;
+function boxInfo(ev) {
+
+  $('.brand-logo').on('click', function (ev) {
+    if ($(this).attr('href') == '#info-dev') {
+      ev.preventDefault();
+
+      var _$infoDev = $('#info-dev');
+      var _arrIn = _$infoDev.find('.content .icon-in');
+      var _arrOut = _$infoDev.closest('.nav-wrapper').find('.icon-out');
+
+      if (_$infoDev.hasClass('show')) {
+        // Tiene show class, entonces ocultar
+        _$infoDev.removeClass('show');
+        for (var i = 0; i < _arrIn.length; i++) {
+          var el = _arrIn[i];
+
+          $(el).addClass('i' + i).addClass('prepare');
+        }
+
+        for (var i = 0; i < _arrOut.length; i++) {
+          var el = _arrOut[i];
+
+          $(el).addClass('j' + i).addClass('prepare');
+        }
+      } else {
+        // Si no está mostrando la caja de información
+        _$infoDev.addClass('show');
+        for (var i = 0; i < _arrIn.length; i++) {
+          var el = _arrIn[i];
+          $(el).addClass('i' + i).removeClass('prepare');
+        }
+
+        for (var i = 0; i < _arrOut.length; i++) {
+          var el = _arrOut[i];
+          $(el).addClass('j' + i).removeClass('prepare');
+        }
+      }
+    }
+
+    $(this).blur(function () {
+      // Ocultar por desenfocar
+      $infoDev.removeClass('show');
+      for (var i = 0; i < arrIn.length; i++) {
+        var el = arrIn[i];
+
+        $(el).addClass('i' + i).addClass('prepare');
+      }
+
+      for (var i = 0; i < arrOut.length; i++) {
+        var el = arrOut[i];
+
+        $(el).addClass('j' + i).addClass('prepare');
+      }
+    });
+  });
+}
+
+},{}],384:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _templateObject = _taggedTemplateLiteral(['<a href="#header-container" class="btn-up btn moveRight"><i class="fa hello-world ion-arrow-up-a faa-vertical animated"></i></a>'], ['<a href="#header-container" class="btn-up btn moveRight"><i class="fa hello-world ion-arrow-up-a faa-vertical animated"></i></a>']);
+
+exports.default = init;
+
+var _yoYo = require('yo-yo');
+
+var _yoYo2 = _interopRequireDefault(_yoYo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function init() {
+
+  // Variables
+  var btnUp = (0, _yoYo2.default)(_templateObject);
+
+  $('body').append(btnUp);
+}
+
+},{"yo-yo":366}],385:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12128,17 +12236,20 @@ function header(ctx, next) {
     offset: 0
   });
 
+  _animations2.default.init();
+  _animations2.default.anim();
+  _animations2.default.boxInfo();
+
   $('#modals-container').empty().append(_modal2.default.login());
 
   $('.modal').modal();
 
   $('.scrollspy').scrollSpy();
 
-  _animations2.default.init();
   next();
 }
 
-},{"./animations":381,"./modal":384,"./template":386,"yo-yo":366}],384:[function(require,module,exports){
+},{"./animations":382,"./modal":386,"./template":388,"yo-yo":366}],386:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12155,7 +12266,7 @@ exports.default = {
   login: _modalLogin2.default
 };
 
-},{"./modal-login":385}],385:[function(require,module,exports){
+},{"./modal-login":387}],387:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12179,7 +12290,7 @@ function login(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],386:[function(require,module,exports){
+},{"yo-yo":366}],388:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12188,7 +12299,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _templateObject = _taggedTemplateLiteral(['<a class="dropdown-button profile-img" href="#"><img src="', '" alt="profile image"></a>'], ['<a class="dropdown-button profile-img" href="#"><img src="', '" alt="profile image"></a>']),
     _templateObject2 = _taggedTemplateLiteral(['<a class="waves-effect btn-floating btn-flat" href="#modal_login"><i class="ion-person"></i></a>'], ['<a class="waves-effect btn-floating btn-flat" href="#modal_login"><i class="ion-person"></i></a>']),
-    _templateObject3 = _taggedTemplateLiteral(['\n    <div>\n\n      <nav class="pushpin-nav pinned target" data-target="blue" style="top: 0px;">\n        <div class="nav-wrapper">\n          <a href="#header-container" class="left hide-on-large-only waves-effect btn-floating btn-flat brand-logo margin-12-12"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <a href="#header-container" class="left hide-on-med-and-down waves-effect center btn-floating btn-flat brand-logo margin-12-12"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <ul class="right">\n            <li><a href="sass.html">Contenido</a></li>\n            <li><a href="badges.html">Contacto</a></li>\n            <!-- Dropdown Trigger -->\n            <li>', '\n              <!-- Dropdown Structure -->\n              <ul id="userOptions" class="dropdown-content ready">\n                <li><a href="/user/folder">Portafolio</a></li>\n                <li class="divider"></li>\n                <li><a href="/logout">Cerrar sesi\xF3n</a></li>\n              </ul>\n            </li>\n          </ul>\n        </div>\n      </nav>\n\n    </div>\n  '], ['\n    <div>\n\n      <nav class="pushpin-nav pinned target" data-target="blue" style="top: 0px;">\n        <div class="nav-wrapper">\n          <a href="#header-container" class="left hide-on-large-only waves-effect btn-floating btn-flat brand-logo margin-12-12"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <a href="#header-container" class="left hide-on-med-and-down waves-effect center btn-floating btn-flat brand-logo margin-12-12"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <ul class="right">\n            <li><a href="sass.html">Contenido</a></li>\n            <li><a href="badges.html">Contacto</a></li>\n            <!-- Dropdown Trigger -->\n            <li>', '\n              <!-- Dropdown Structure -->\n              <ul id="userOptions" class="dropdown-content ready">\n                <li><a href="/user/folder">Portafolio</a></li>\n                <li class="divider"></li>\n                <li><a href="/logout">Cerrar sesi\xF3n</a></li>\n              </ul>\n            </li>\n          </ul>\n        </div>\n      </nav>\n\n    </div>\n  ']);
+    _templateObject3 = _taggedTemplateLiteral(['\n    <div>\n\n      <nav class="pushpin-nav pinned target" data-target="blue" style="top: 0px;">\n        <div class="nav-wrapper">\n          <a href="/" class="left hide-on-large-only waves-effect btn-floating btn-flat brand-logo"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <a href="/" class="left hide-on-med-and-down waves-effect center btn-floating btn-flat brand-logo"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n            <!-- Dropdown Structure -->\n            <ul id="info-dev" class="dropdown-content info-dev">\n              <li>\n                <div class="content">\n                  <span>Parques Gir 2017 \xA9</span>\n                  <span>Desarrollado por</span>\n                  <span class="author">Jeisson Andr\xE9s Valderrama</span>\n                  <i class="ion-star icon-in  prepare"></i>\n                  <i class="ion-earth icon-in  prepare"></i>\n                  <i class="ion-social-nodejs icon-in prepare"></i>\n                  <i class="ion-social-nodejs icon-in prepare"></i>\n                  <i class="ion-social-python icon-in prepare"></i>\n                </div>\n              </li>\n            </ul>\n            <i class="ion-android-laptop icon-out prepare"></i>\n            <i class="ion-pull-request icon-out prepare"></i>\n            <i class="ion-social-github icon-out prepare"></i>\n            <i class="ion-social-html5 icon-out prepare"></i>\n          <ul class="right">\n            <li><a href="sass.html">Contenido</a></li>\n            <li><a href="badges.html">Contacto</a></li>\n            <!-- Dropdown Trigger -->\n            <li>', '\n              <!-- Dropdown Structure -->\n              <ul id="userOptions" class="dropdown-content ready">\n                <li><a href="/user/folder">Portafolio</a></li>\n                <li class="divider"></li>\n                <li><a href="/logout">Cerrar sesi\xF3n</a></li>\n              </ul>\n            </li>\n          </ul>\n        </div>\n      </nav>\n\n    </div>\n  '], ['\n    <div>\n\n      <nav class="pushpin-nav pinned target" data-target="blue" style="top: 0px;">\n        <div class="nav-wrapper">\n          <a href="/" class="left hide-on-large-only waves-effect btn-floating btn-flat brand-logo"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n          <a href="/" class="left hide-on-med-and-down waves-effect center btn-floating btn-flat brand-logo"><i class="fa fa-circle-o faa-burst animated"></i><i class="fa ion-ios-home hello-world"></i> </a>\n            <!-- Dropdown Structure -->\n            <ul id="info-dev" class="dropdown-content info-dev">\n              <li>\n                <div class="content">\n                  <span>Parques Gir 2017 \xA9</span>\n                  <span>Desarrollado por</span>\n                  <span class="author">Jeisson Andr\xE9s Valderrama</span>\n                  <i class="ion-star icon-in  prepare"></i>\n                  <i class="ion-earth icon-in  prepare"></i>\n                  <i class="ion-social-nodejs icon-in prepare"></i>\n                  <i class="ion-social-nodejs icon-in prepare"></i>\n                  <i class="ion-social-python icon-in prepare"></i>\n                </div>\n              </li>\n            </ul>\n            <i class="ion-android-laptop icon-out prepare"></i>\n            <i class="ion-pull-request icon-out prepare"></i>\n            <i class="ion-social-github icon-out prepare"></i>\n            <i class="ion-social-html5 icon-out prepare"></i>\n          <ul class="right">\n            <li><a href="sass.html">Contenido</a></li>\n            <li><a href="badges.html">Contacto</a></li>\n            <!-- Dropdown Trigger -->\n            <li>', '\n              <!-- Dropdown Structure -->\n              <ul id="userOptions" class="dropdown-content ready">\n                <li><a href="/user/folder">Portafolio</a></li>\n                <li class="divider"></li>\n                <li><a href="/logout">Cerrar sesi\xF3n</a></li>\n              </ul>\n            </li>\n          </ul>\n        </div>\n      </nav>\n\n    </div>\n  ']);
 
 exports.default = template;
 
@@ -12214,7 +12325,7 @@ function template(opts) {
   return (0, _yoYo2.default)(_templateObject3, btnLogin);
 }
 
-},{"yo-yo":366}],387:[function(require,module,exports){
+},{"yo-yo":366}],389:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12229,8 +12340,6 @@ function aparitionToCenter() {
   $three.addClass('moveRight');
 
   $(document).on('scroll', function (ev) {
-
-    console.log($(document).scrollTop());
 
     // Night and day transition
     if ($(document).scrollTop() > 300) {
@@ -12247,7 +12356,7 @@ function aparitionToCenter() {
   });
 }
 
-},{}],388:[function(require,module,exports){
+},{}],390:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12264,7 +12373,7 @@ exports.default = {
   aparitionToCenter: _aparitions2.default
 };
 
-},{"./aparitions":387}],389:[function(require,module,exports){
+},{"./aparitions":389}],391:[function(require,module,exports){
 'use strict';
 
 var _page = require('page');
@@ -12308,7 +12417,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   });
 });
 
-},{"../header":383,"../utils/data-center":408,"./animations":388,"./template":391,"page":361,"title":365}],390:[function(require,module,exports){
+},{"../header":385,"../utils/data-center":411,"./animations":390,"./template":393,"page":361,"title":365}],392:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12332,7 +12441,7 @@ function carouselTemp(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],391:[function(require,module,exports){
+},{"yo-yo":366}],393:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12368,7 +12477,7 @@ function template() {
   return (0, _yoYo2.default)(_templateObject, (0, _sect2.default)(), (0, _sect4.default)(), (0, _sect6.default)());
 }
 
-},{"./sect-1":392,"./sect-2":393,"./sect-3":394,"yo-yo":366}],392:[function(require,module,exports){
+},{"./sect-1":394,"./sect-2":395,"./sect-3":396,"yo-yo":366}],394:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12396,7 +12505,7 @@ function sectOne(opts) {
   return (0, _yoYo2.default)(_templateObject, (0, _carousel2.default)());
 }
 
-},{"./carousel":390,"yo-yo":366}],393:[function(require,module,exports){
+},{"./carousel":392,"yo-yo":366}],395:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12420,7 +12529,7 @@ function sectTwo(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],394:[function(require,module,exports){
+},{"yo-yo":366}],396:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12444,7 +12553,7 @@ function sectThree(opts) {
   return (0, _yoYo2.default)(_templateObject);
 }
 
-},{"yo-yo":366}],395:[function(require,module,exports){
+},{"yo-yo":366}],397:[function(require,module,exports){
 'use strict';
 
 var _page = require('page');
@@ -12471,7 +12580,7 @@ require('./paper-edit');
 // PLUGINS FOR SOCIAL NETWORKS
 (0, _SDKFacebook2.default)();
 
-},{"./SDK-facebook":368,"./auth":369,"./folder":375,"./home":389,"./paper":406,"./paper-edit":400,"babel-polyfill":26,"page":361}],396:[function(require,module,exports){
+},{"./SDK-facebook":368,"./auth":369,"./folder":375,"./home":391,"./paper":409,"./paper-edit":402,"babel-polyfill":26,"page":361}],398:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12488,7 +12597,7 @@ exports.default = {
   saveChanges: _savePaper2.default
 };
 
-},{"./save-paper":397}],397:[function(require,module,exports){
+},{"./save-paper":399}],399:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12528,7 +12637,7 @@ function saveChanges(exposedId) {
   });
 }
 
-},{"../data-comm/send-chgs":399}],398:[function(require,module,exports){
+},{"../data-comm/send-chgs":401}],400:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12565,7 +12674,6 @@ function onsubmit(ev) {
     var img = res.data.img;
     img.position = place;
     console.log(res.data.message);
-    console.log(img);
     $modal.modal('close');
     $btnAdd.removeClass('disabled').html('Agregar');
 
@@ -12603,7 +12711,7 @@ function onsubmit(ev) {
   });
 }
 
-},{"axios":1,"yo-yo":366}],399:[function(require,module,exports){
+},{"axios":1,"yo-yo":366}],401:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12625,7 +12733,7 @@ function sendChgs(data) {
   });
 }
 
-},{}],400:[function(require,module,exports){
+},{}],402:[function(require,module,exports){
 'use strict';
 
 var _header = require('../header');
@@ -12666,11 +12774,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     $('.modal').modal();
     $('select').material_select();
     $('.materialboxed').materialbox();
-    _animations2.default.saveChanges();
+    _animations2.default.saveChanges(ctx.paper.exposedId);
   });
 });
 
-},{"../header":383,"../utils/data-center":408,"./animations":396,"./template":405,"page":361,"title":365}],401:[function(require,module,exports){
+},{"../header":385,"../utils/data-center":411,"./animations":398,"./template":408,"page":361,"title":365}],403:[function(require,module,exports){
+arguments[4][376][0].apply(exports,arguments)
+},{"dup":376,"yo-yo":366}],404:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12681,13 +12791,18 @@ var _uploadImg = require('./upload-img');
 
 var _uploadImg2 = _interopRequireDefault(_uploadImg);
 
+var _help = require('./help');
+
+var _help2 = _interopRequireDefault(_help);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  uploadImg: _uploadImg2.default
+  uploadImg: _uploadImg2.default,
+  help: _help2.default
 };
 
-},{"./upload-img":402}],402:[function(require,module,exports){
+},{"./help":403,"./upload-img":405}],405:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12715,7 +12830,7 @@ function uploadImg(id) {
   return (0, _yoYo2.default)(_templateObject, (0, _formAddImg2.default)(id));
 }
 
-},{"../template/form-add-img":403,"yo-yo":366}],403:[function(require,module,exports){
+},{"../template/form-add-img":406,"yo-yo":366}],406:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12745,14 +12860,14 @@ function formAddImg(exId) {
   return temp;
 }
 
-},{"../data-comm/add-img":398,"yo-yo":366}],404:[function(require,module,exports){
+},{"../data-comm/add-img":400,"yo-yo":366}],407:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    <div class="row" id="editArtContent">\n      <form id="inForm" enctype="multipart/form-data" class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Edita cualquier campo del art\xEDculo. Tienes una <a href="#modal_help">ayuda</a> en caso de necesitar.\n            Al subir fotos tienes un l\xEDmite de max 3 im\xE1genes por art\xEDculo.\n            <a href="#">Sugierenos</a> tus ideas o necesidades para este editor\n\n          </p>\n        </div>\n        <div class="row">\n          <div class="col s12">\n            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir / reemplazar imagen</a>\n          </div>\n          <div class="col s4 img-main">\n            <img class="materialboxed" data-caption="Imagen principal, la primera en verse del art\xEDculo" src="', '" alt="">\n            <span>imagen de introducci\xF3n</span>\n          </div>\n          <div class="col s4 img-secon">\n            <img class="materialboxed" data-caption="Pen\xFAltima imagen, en la parte inferior del art\xEDculo" src="', '" alt="">\n            <span>imagen de conclusi\xF3n</span>\n          </div>\n          <div class="col s4 img-final">\n            <img class="materialboxed" data-caption="\xDAltima imagen, en la parte inferior del art\xEDculo" src="', '" alt="">\n            <span>imagen de conclusi\xF3n (final)</span>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate" value="', '">\n            <label class="active" data-error="dato necesario" for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate" value="', '">\n            <label class="active" for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate" value="', '">\n            <input id="user" type="hidden" value="', '">\n            <label class="active" data-error="dato necesario" for="ref">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate">', '</textarea>\n            <label class="active" data-error="dato necesario" for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  '], ['\n    <div class="row" id="editArtContent">\n      <form id="inForm" enctype="multipart/form-data" class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Edita cualquier campo del art\xEDculo. Tienes una <a href="#modal_help">ayuda</a> en caso de necesitar.\n            Al subir fotos tienes un l\xEDmite de max 3 im\xE1genes por art\xEDculo.\n            <a href="#">Sugierenos</a> tus ideas o necesidades para este editor\n\n          </p>\n        </div>\n        <div class="row">\n          <div class="col s12">\n            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir / reemplazar imagen</a>\n          </div>\n          <div class="col s4 img-main">\n            <img class="materialboxed" data-caption="Imagen principal, la primera en verse del art\xEDculo" src="', '" alt="">\n            <span>imagen de introducci\xF3n</span>\n          </div>\n          <div class="col s4 img-secon">\n            <img class="materialboxed" data-caption="Pen\xFAltima imagen, en la parte inferior del art\xEDculo" src="', '" alt="">\n            <span>imagen de conclusi\xF3n</span>\n          </div>\n          <div class="col s4 img-final">\n            <img class="materialboxed" data-caption="\xDAltima imagen, en la parte inferior del art\xEDculo" src="', '" alt="">\n            <span>imagen de conclusi\xF3n (final)</span>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate" value="', '">\n            <label class="active" data-error="dato necesario" for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate" value="', '">\n            <label class="active" for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate" value="', '">\n            <input id="user" type="hidden" value="', '">\n            <label class="active" data-error="dato necesario" for="ref">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate">', '</textarea>\n            <label class="active" data-error="dato necesario" for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n    <div class="row" id="editArtContent">\n      <form id="inForm" enctype="multipart/form-data" class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a href="/paper/', '" target="_self" class="waves-effect waves-teal btn-flat left green-text">ver art\xEDculo</a>\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Edita cualquier campo del art\xEDculo. Tienes una <a href="#modal_help">ayuda</a> en caso de necesitar.\n            Al subir fotos tienes un l\xEDmite de max 3 im\xE1genes por art\xEDculo.\n            <a href="#">Sugierenos</a> tus ideas o necesidades para este editor\n\n          </p>\n        </div>\n        <div class="row">\n          <div class="col s12">\n            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir / reemplazar imagen</a>\n          </div>\n          <div class="col s4 img-main">\n            <img class="materialboxed" data-caption="Imagen principal, la primera en verse del art\xEDculo" src="', '" alt="">\n            <span>imagen de introducci\xF3n</span>\n          </div>\n          <div class="col s4 img-secon">\n            <img class="materialboxed" data-caption="Pen\xFAltima imagen, en la parte inferior del art\xEDculo" src="', '" alt="">\n            <span>imagen de conclusi\xF3n</span>\n          </div>\n          <div class="col s4 img-final">\n            <img class="materialboxed" data-caption="\xDAltima imagen, en la parte inferior del art\xEDculo" src="', '" alt="">\n            <span>imagen de conclusi\xF3n (final)</span>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate" value="', '">\n            <label class="active" data-error="dato necesario" for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate" value="', '">\n            <label class="active" for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate" value="', '">\n            <input id="user" type="hidden" value="', '">\n            <label class="active" data-error="dato necesario" for="ref">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate">', '</textarea>\n            <label class="active" data-error="dato necesario" for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  '], ['\n    <div class="row" id="editArtContent">\n      <form id="inForm" enctype="multipart/form-data" class="col s12">\n        <div class="row">\n          <div class="col s12">\n            <a href="/paper/', '" target="_self" class="waves-effect waves-teal btn-flat left green-text">ver art\xEDculo</a>\n            <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n            <a href="#modal_help" class="waves-effect waves-teal btn-flat right">Ayuda</a>\n          </div>\n        </div>\n        <div class="row">\n          <p>\n            Edita cualquier campo del art\xEDculo. Tienes una <a href="#modal_help">ayuda</a> en caso de necesitar.\n            Al subir fotos tienes un l\xEDmite de max 3 im\xE1genes por art\xEDculo.\n            <a href="#">Sugierenos</a> tus ideas o necesidades para este editor\n\n          </p>\n        </div>\n        <div class="row">\n          <div class="col s12">\n            <a href="#modal_upimg" class="waves-effect waves-light btn edit-btn"><i class="ion-image right"></i> Subir / reemplazar imagen</a>\n          </div>\n          <div class="col s4 img-main">\n            <img class="materialboxed" data-caption="Imagen principal, la primera en verse del art\xEDculo" src="', '" alt="">\n            <span>imagen de introducci\xF3n</span>\n          </div>\n          <div class="col s4 img-secon">\n            <img class="materialboxed" data-caption="Pen\xFAltima imagen, en la parte inferior del art\xEDculo" src="', '" alt="">\n            <span>imagen de conclusi\xF3n</span>\n          </div>\n          <div class="col s4 img-final">\n            <img class="materialboxed" data-caption="\xDAltima imagen, en la parte inferior del art\xEDculo" src="', '" alt="">\n            <span>imagen de conclusi\xF3n (final)</span>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s6">\n            <input id="title" type="text" class="validate" value="', '">\n            <label class="active" data-error="dato necesario" for="title">T\xEDtulo</label>\n          </div>\n          <div class="input-field col s6">\n            <input id="video" type="text" class="validate" value="', '">\n            <label class="active" for="video">V\xEDdeo (link, es opcional)</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <input id="ref" type="text" class="validate" value="', '">\n            <input id="user" type="hidden" value="', '">\n            <label class="active" data-error="dato necesario" for="ref">Link facebook</label>\n          </div>\n        </div>\n        <div class="row">\n          <div class="input-field col s12">\n            <textarea id="description" class="materialize-textarea validate">', '</textarea>\n            <label class="active" data-error="dato necesario" for="description">Descripci\xF3n</label>\n          </div>\n        </div>\n        <div class="row">\n          <a href="#header-container" class="waves-effect waves-teal btn-flat right save-btn">Guardar</a>\n        </div>\n      </form>\n    </div>\n  ']);
 
 exports.default = formEdit;
 
@@ -12776,19 +12891,19 @@ function formEdit(p) {
     }
   }
 
-  var temp = (0, _yoYo2.default)(_templateObject, imgs[0], imgs[1], imgs[2], p.title, p.video, p.face_link, p.userId, p.description);
+  var temp = (0, _yoYo2.default)(_templateObject, p.exposedId, imgs[0], imgs[1], imgs[2], p.title, p.video, p.face_link, p.userId, p.description);
 
   return temp;
 }
 
-},{"yo-yo":366}],405:[function(require,module,exports){
+},{"yo-yo":366}],408:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/user/folder" class="breadcrumb-ref">Tus publicaciones <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/edit/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Edici\xF3n de art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n\n\n      <div class="row">\n        ', '\n      </div>\n\n\n      ', '\n    </div>\n  '], ['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/user/folder" class="breadcrumb-ref">Tus publicaciones <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/edit/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Edici\xF3n de art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n\n\n      <div class="row">\n        ', '\n      </div>\n\n\n      ', '\n    </div>\n  ']);
+var _templateObject = _taggedTemplateLiteral(['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/user/folder" class="breadcrumb-ref">Tus publicaciones <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/edit/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Edici\xF3n de art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n\n\n      <div class="row">\n        ', '\n      </div>\n\n\n      ', '\n      ', '\n    </div>\n  '], ['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/user/folder" class="breadcrumb-ref">Tus publicaciones <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/edit/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Edici\xF3n de art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n\n\n      <div class="row">\n        ', '\n      </div>\n\n\n      ', '\n      ', '\n    </div>\n  ']);
 
 exports.default = template;
 
@@ -12810,12 +12925,12 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 function template(paper) {
 
-  var temp = (0, _yoYo2.default)(_templateObject, paper.exposedId, (0, _formEdit2.default)(paper), _modals2.default.uploadImg(paper.exposedId));
+  var temp = (0, _yoYo2.default)(_templateObject, paper.exposedId, (0, _formEdit2.default)(paper), _modals2.default.uploadImg(paper.exposedId), _modals2.default.help());
 
   return temp;
 }
 
-},{"../modals":401,"./form-edit":404,"yo-yo":366}],406:[function(require,module,exports){
+},{"../modals":404,"./form-edit":407,"yo-yo":366}],409:[function(require,module,exports){
 'use strict';
 
 var _header = require('../header');
@@ -12846,12 +12961,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
     var $main = $('#main-container');
     (0, _title2.default)(ctx.paper.title.substr(0, 15));
-    delete ctx.paper.userId;
     $main.empty().append((0, _template2.default)(ctx.paper, ctx.auth.exposedId));
   });
 });
 
-},{"../header":383,"../utils/data-center":408,"./template":407,"page":361,"title":365}],407:[function(require,module,exports){
+},{"../header":385,"../utils/data-center":411,"./template":410,"page":361,"title":365}],410:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12859,7 +12973,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _templateObject = _taggedTemplateLiteral(['\n      <div class="col s12 m3 center">\n        <a href="/paper/edit/', '" class="btn edit-btn">Editar art\xEDculo</a>\n      </div>'], ['\n      <div class="col s12 m3 center">\n        <a href="/paper/edit/', '" class="btn edit-btn">Editar art\xEDculo</a>\n      </div>']),
-    _templateObject2 = _taggedTemplateLiteral(['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n      <div class="row">\n          <h4>', '</h4>\n      </div>\n      <div class="row">\n        ', '\n        <div class="col s12 ', '">\n          <div class="fb-like" data-href="https://www.facebook.com/Parques-Gir-987208671421660/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>\n        </div>\n      </div>\n      <div class="row">\n        <div class="col s12"><img src="" width="400" alt="Imagen principal"></div>\n        <div class="col s12" id="paragraph"><p>', '</p></div>\n        <div class="col s12">Fotos adicionales</div>\n        <div class="col s12 box-comments"><div data-width="100%" class="fb-comments" data-href="', '" data-numposts="7"></div></div>\n      </div>\n    </div>\n  '], ['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n      <div class="row">\n          <h4>', '</h4>\n      </div>\n      <div class="row">\n        ', '\n        <div class="col s12 ', '">\n          <div class="fb-like" data-href="https://www.facebook.com/Parques-Gir-987208671421660/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>\n        </div>\n      </div>\n      <div class="row">\n        <div class="col s12"><img src="" width="400" alt="Imagen principal"></div>\n        <div class="col s12" id="paragraph"><p>', '</p></div>\n        <div class="col s12">Fotos adicionales</div>\n        <div class="col s12 box-comments"><div data-width="100%" class="fb-comments" data-href="', '" data-numposts="7"></div></div>\n      </div>\n    </div>\n  ']);
+    _templateObject2 = _taggedTemplateLiteral(['<div class="col s12 center"><img src="', '" width="500" alt="Imagen principal"></div>'], ['<div class="col s12 center"><img src="', '" width="500" alt="Imagen principal"></div>']),
+    _templateObject3 = _taggedTemplateLiteral(['<div class="col s12 center"><img src="', '" width="500" alt="Concluision"></div>'], ['<div class="col s12 center"><img src="', '" width="500" alt="Concluision"></div>']),
+    _templateObject4 = _taggedTemplateLiteral(['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n      <div class="row row-title">\n          <h4>', '</h4>\n      </div>\n      <div class="row">\n        ', '\n        <div class="col s12 ', '">\n          <div class="fb-like" data-href="https://www.facebook.com/Parques-Gir-987208671421660/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>\n        </div>\n      </div>\n      <div class="row">\n        ', '\n        <div class="col s12" id="paragraph"><p>', '</p></div>\n        ', '\n        ', '\n        <div class="col s12 box-comments"><div data-width="100%" class="fb-comments" data-href="', '" data-numposts="7"></div></div>\n      </div>\n    </div>\n  '], ['\n    <div class="paper-content">\n      <nav class="breadcrumb-box">\n        <div class="nav-wrapper">\n          <div class="col s12">\n            <a href="/" class="breadcrumb-ref">Principal <i class="ion-ios-arrow-right"></i></a>\n            <a href="/paper/', '" target="_self" class="breadcrumb-ref blue-text text-lighten-3">Art\xEDculo</a>\n          </div>\n        </div>\n      </nav>\n      <div class="row row-title">\n          <h4>', '</h4>\n      </div>\n      <div class="row">\n        ', '\n        <div class="col s12 ', '">\n          <div class="fb-like" data-href="https://www.facebook.com/Parques-Gir-987208671421660/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>\n        </div>\n      </div>\n      <div class="row">\n        ', '\n        <div class="col s12" id="paragraph"><p>', '</p></div>\n        ', '\n        ', '\n        <div class="col s12 box-comments"><div data-width="100%" class="fb-comments" data-href="', '" data-numposts="7"></div></div>\n      </div>\n    </div>\n  ']);
 
 exports.default = template;
 
@@ -12875,18 +12991,37 @@ function template(paper, user) {
 
   var auth = '';
   var an = '';
+  var main = void 0,
+      prefinal = void 0,
+      final = void 0;
 
   if (user == paper.userId) {
     auth = (0, _yoYo2.default)(_templateObject, paper.exposedId);
     an = 'm9';
   }
 
-  var temp = (0, _yoYo2.default)(_templateObject2, paper.exposedId, paper.title, auth, an, paper.description, paper.face_link);
+  for (var i = 0; i < paper.img.length; i++) {
+    var el = paper.img[i];
+
+    if (i == 0 && el != 0) {
+      main = (0, _yoYo2.default)(_templateObject2, el);
+    }
+
+    if (i == 1 && el != 1) {
+      prefinal = (0, _yoYo2.default)(_templateObject3, el);
+    }
+
+    if (i == 2 && el != 2) {
+      final = (0, _yoYo2.default)(_templateObject3, el);
+    }
+  }
+
+  var temp = (0, _yoYo2.default)(_templateObject4, paper.exposedId, paper.title, auth, an, main, paper.description, prefinal, final, paper.face_link);
 
   return temp;
 }
 
-},{"yo-yo":366}],408:[function(require,module,exports){
+},{"yo-yo":366}],411:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12903,7 +13038,7 @@ exports.default = {
   load: _load2.default
 };
 
-},{"./load":409}],409:[function(require,module,exports){
+},{"./load":412}],412:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13050,4 +13185,4 @@ exports.default = {
   paper: paper
 };
 
-},{"axios":1}]},{},[395]);
+},{"axios":1}]},{},[397]);

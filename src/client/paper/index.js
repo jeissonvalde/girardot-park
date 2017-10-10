@@ -17,7 +17,6 @@ page('/paper/:id',
 
     let $main = $('#main-container')
     title(ctx.paper.title.substr(0, 15))
-    delete ctx.paper.userId
     $main.empty().append(template(ctx.paper, ctx.auth.exposedId))
   })
 })

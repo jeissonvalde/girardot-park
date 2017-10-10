@@ -16,6 +16,9 @@ export default function header (ctx, next) {
     offset: 0
   })
 
+  animations.init()
+  animations.anim()
+  animations.boxInfo()
 
   $('#modals-container').empty().append(modal.login())
 
@@ -23,6 +26,5 @@ export default function header (ctx, next) {
 
   $('.scrollspy').scrollSpy()
 
-  animations.init()
   next()
 }

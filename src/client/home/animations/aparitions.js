@@ -10,8 +10,6 @@ export default function aparitionToCenter () {
 
   $(document).on('scroll', function (ev) {
 
-    console.log($(document).scrollTop())
-
     // Night and day transition
     if ($(document).scrollTop() > 300) {
       $two.removeClass('moveLeft')
