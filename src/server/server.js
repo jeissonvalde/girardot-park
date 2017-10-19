@@ -12,13 +12,18 @@ import multer from 'multer'
 import ext from 'file-extension'
 import fs from 'fs'
 import path from 'path'
+import mongoose from 'mongoose'
+import Db from './mongo/lib/db'
 
 // Create Instances
 const app = express()
 const client = new girpark.createClient()
+const db = new Db(config.db)
 
 const port = process.env.PORT || 3000
+const portdb = 27017 // 39092 - 27017 - 28015
 const env = process.env.NODE_ENV || 'production'
+const domain = 'localhost'
 
 // Almacenamiento de imagenes
 var storage = multer.diskStorage({
@@ -196,4 +201,11 @@ app.post('/upload-image', ensureAuth, (req, res) => {
   })
 })
 
-app.listen(port, () => console.log(`Parques Gir server listening on port ${port}`))
+mongoose.connect(`mongodb://${domain}:${portdb}/${config.db.name}`, (err, res) => {
+  if (err) {
+    return console.log(`Error al conectar a mongodb: ${err}`)
+  }
+
+  console.log('¡Conexión a la base de datos establecida!')
+  app.listen(port, () => console.log(`Parques Gir server listening on port ${port}`))
+})

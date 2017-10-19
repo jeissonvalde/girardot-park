@@ -10,7 +10,11 @@ const config = {
     }
   },
 
-  secret: process.env.PARQUESGIR_SECRET
+  secret: process.env.PARQUESGIR_SECRET,
+
+  db: {
+    name: 'parquesgir_test'
+  }
 }
 
 if (process.env.NODE_ENV == 'test') {
