@@ -1,22 +1,21 @@
 'use strict'
 
-import page from 'page'
-import title from 'title'
 import template from './template'
 import animation from './animations'
-import header from '../header'
-import data from '../utils/data-center'
+// import header from '../header'
+// import data from '../utils/data-center'
 
 
 page('/',
-      data.load.auth,
-      header,
+      // data.load.auth,
+      // header,
       (ctx, next) => {
 
   $(document).ready(function(){
 
+    console.log('Home page, with page.js and require.js')
     let $main = $('#main-container')
-    title('Parques Girardot')
+    document.title = 'Parques Girardot'
     $main.empty().append(template())
 
     // Materialize components

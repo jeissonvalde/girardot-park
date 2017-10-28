@@ -6,7 +6,7 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
 import config from './config'
-import girpark from 'parquesgir-client'
+// import girpark from 'parquesgir-client'
 import auth from './auth'
 import multer from 'multer'
 import ext from 'file-extension'
@@ -15,7 +15,7 @@ import path from 'path'
 
 // Create Instances
 const app = express()
-const client = new girpark.createClient()
+// const client = new girpark.createClient()
 
 const port = process.env.PORT || 3000
 const env = process.env.NODE_ENV || 'production'
@@ -61,7 +61,6 @@ let badAccess = 'A ocurrido un error al ingresar con '
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }))
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-
   successRedirect: '/',
   failureRedirect: `/error/${badAccess + ' facebook'}` }))
 
